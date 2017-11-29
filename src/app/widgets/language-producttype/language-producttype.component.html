@@ -1,0 +1,24 @@
+<li class="dropdown messages-menu" >
+  <a class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-language"></i>
+    {{currentLanguage.name}}
+  </a>
+  <ul class="dropdown-menu" style="min-width:74px;width:auto;">
+    <li *ngFor="let lan of (languageList|async)?.data; let i=index;">
+      <a href="javaScript:void(0);" (click)="queryProduct(false,lan,1)">{{lan.name}}</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown messages-menu" >
+  <a class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-anchor"></i>
+      {{currentProductType.name}}
+  </a>
+  <ul class="dropdown-menu" style="min-width:74px;width:auto;">
+    <li *ngFor="let pro of productTypeList; let i=index;">
+      <a href="javaScript:void(0);" (click)="queryProduct(false,pro,2)">{{pro.name}}</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown user user-menu userBox">
+

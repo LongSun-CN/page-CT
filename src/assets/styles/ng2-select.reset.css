@@ -1,0 +1,31 @@
+.ng-select-sm div.ui-select-choices-row,
+.ng-select-sm div.ui-select-choices-row,
+.ng-select-sm div.ui-select-choices-row,
+.ng-select-sm div.ui-select-choices-row {
+    width: 100%;
+}
+
+.ng-select-sm span.ui-select-toggle,
+.ng-select-sm span.ui-select-toggle,
+.ng-select-sm span.ui-select-toggle,
+.ng-select-sm span.ui-select-toggle {
+    width: 148px; /* 宽高默认设置为 input-sm 对应的宽高 */
+    height: 30px;
+}
+
+.ng-select-sm input.ui-select-search,
+.ng-select-sm input.ui-select-search,
+.ng-select-sm input.ui-select-search,
+.ng-select-sm input.ui-select-search {
+    width: 148px !important;
+    height: 30px;
+}
+
+.ng-select-sm .ui-select-match span, .ng-select-sm .ui-select-choices {
+    border-radius: 0px;
+    line-height: 16px;
+}
+
+ul.ui-select-choices {
+    max-height: 350px !important;
+}

@@ -1,0 +1,28 @@
+.col-sm-12 .box .box-body >>> label {
+    /*margin: 0px 10px;*/
+}
+
+.box .box-body >>> label, .col-md-12 .box .box-body >>> label {
+    /*margin-right: 10px;*/
+}
+
+.box .box-body >>> .form-group {
+    margin-top: 5px;
+}
+
+.box .box-body {
+    padding: 10px;
+}
+
+.box .box-body >>> .toolbar {
+    color: #444444;
+    margin: 10px 0px;
+}
+
+.box .box-body >>> select.input-sm {
+    width: 148px !important;
+}
+
+.badge{
+  cursor: pointer;
+}

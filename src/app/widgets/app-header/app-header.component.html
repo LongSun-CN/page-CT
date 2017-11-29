@@ -1,0 +1,61 @@
+<!-- Main Header -->
+<header class="main-header">
+  <!-- Header Navbar -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- LOGO -->
+    <div class="navbar-custom-menu navbar-left">
+      <div class="t_left">
+        <img src="../../../assets/img/logo_zqjk.png">
+      </div>
+      <div class="t_right">
+        <div class="t_top">
+          CT
+        </div>
+        <div class="t_bottom">
+          后台管理系统
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar Left Menu -->
+    <!--<div class="collapse navbar-collapse pull-left">
+        <ul class="nav navbar-nav" *ngIf="logcenter && !isMis">
+            <li class="dropdown switch-log" switch-log></li>
+        </ul>
+        <form class="navbar-form navbar-left" *ngIf="!isMis">
+            <div class="form-group">
+                <input type="text" class="form-control input-sm search-input" placeholder="搜索">
+                <i class="fa fa-search" style="top:2px;left:-22px;position:relative;"></i>
+            </div>
+        </form>
+    </div>-->
+
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+      <!--<ul class="nav navbar-nav" *ngIf="!isMis">
+          <li class="dropdown messages-menu" *ngFor="let module of modules">&lt;!&ndash; start notification &ndash;&gt;
+              <a *ngIf="module.code==='kfqa'" routerLink="kfqa" queryParamsHandling="merge" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa  fa-user"></i>
+                  {{ module.name }}
+              </a>
+              <a *ngIf="module.code==='bbs'" routerLink="bbs" queryParamsHandling="merge" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-btc"></i>
+                  社区
+              </a>
+              <a *ngIf="module.code==='gamecode'" routerLink="gamecode" queryParamsHandling="merge" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-puzzle-piece"></i>
+                  {{ module.name }}
+              </a>
+          </li>
+          &lt;!&ndash;<li style="padding:0px 8px;"><a style="width:0px;height:16px;border-right:1px solid white;padding:0px 2px;margin:16px 2px 0px 2px;"></a></li>&ndash;&gt;
+      </ul>-->
+
+      <ul class="nav navbar-nav">
+        <li class="dropdown user user-menu userBox"></li>
+        <!--<li class="dropdown messages-menu" router-tabs-manager></li>-->
+        <li><a toggleFullscreen><i class="fa fa-arrows-alt"></i></a></li>
+        <li><a data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

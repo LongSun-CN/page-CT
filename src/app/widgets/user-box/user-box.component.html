@@ -1,0 +1,75 @@
+<!-- Menu Toggle Button -->
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <!-- The user image in the navbar-->
+    <img src="../../../assets/img/avatar.png" class="user-image" [alt]="currentUser.name">
+    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+    <span class="hidden-xs">{{currentUser.name}}</span>
+</a>
+
+<ul class="dropdown-menu">
+    <!-- The user image in the menu -->
+    <li class="user-header">
+        <img src="../../../assets/img/avatar.png" class="img-circle" [alt]="currentUser.name">
+        <p>
+            {{currentUser.name}} - {{currentUser.jobNumber}}
+            <small>{{currentUser.account}} - {{currentUser.mail}}</small>
+        </p>
+    </li>
+    <!-- Menu Footer-->
+    <li class="user-footer">
+        <div class="pull-left">
+            <a (click)="openModifyPasswordDialog(template);" class="btn btn-default btn-flat">{{'修改密码'|translate}}</a>
+        </div>
+        <!--<div class="media-middle">-->
+        <!--<a href="#" class="btn btn-default btn-flat">系统管理</a>-->
+        <!--</div>-->
+        <div class="pull-right">
+            <a (click)="logout()" class="btn btn-default btn-flat">{{'退出'|translate}}</a>
+        </div>
+    </li>
+</ul>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'修改密码'|translate}}</h4>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" ourpalm-form enctype="multipart/form-data" method="post">
+            <fieldset>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        {{'旧密码'|translate}}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="user.oldPassword" name="title" class="form-control input-sm" placeholder="{{'请输入旧密码'|translate}}">
+                    </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        {{'新密码'|translate}}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="user.newPassword" name="title" class="form-control input-sm" placeholder="{{'请输入新密码'|translate}}">
+                    </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        {{'确认密码'|translate}}
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" [(ngModel)]="user.rePassword" name="title" class="form-control input-sm" placeholder="{{'请输入确认密码'|translate}}">
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modifyPassword()">{{'修改'|translate}}</button>
+    </div>
+</ng-template>

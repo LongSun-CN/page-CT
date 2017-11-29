@@ -1,0 +1,98 @@
+/*头部*/
+.top-collapse .main-header {
+    margin-top: -47px;
+    animation: expanded-header 1s;
+}
+
+/*左侧菜单*/
+.top-collapse .main-sidebar {
+    padding-top: 0;
+    animation: collapse-menu 1s;
+}
+
+.top-collapse .main-sidebar-expand {
+    padding-top: 50px;
+    animation: expanded-menu 1s;
+}
+
+/*右侧控制台*/
+.top-collapse .control-sidebar {
+    padding-top: 0;
+    animation: collapse-menu 1s;
+}
+
+.top-collapse .control-sidebar-expand {
+    padding-top: 50px;
+    animation: expanded-menu 1s;
+}
+
+/*中间内容*/
+.top-collapse .content-header, .top-collapse .content.no-header {
+    padding-top: 15px;
+    animation: collapse-content 1s;
+}
+
+.top-collapse .content-header-expand, .top-collapse .content.no-header-expand {
+    padding-top: 65px;
+    animation: expanded-content 1s;
+}
+
+/*头部hover*/
+.top-collapse .main-header:hover {
+    margin-top: 0;
+    animation: collapse-header 1s;
+}
+
+@keyframes collapse-header {
+    from {
+        margin-top: -47px;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes expanded-header {
+    from {
+        margin-top: 0;
+    }
+    to {
+        margin-top: -47px;
+    }
+}
+
+@keyframes collapse-menu {
+    from {
+        padding-top: 50px;
+    }
+    to {
+        padding-top: 0;
+    }
+}
+
+@keyframes expanded-menu {
+    from {
+        padding-top: 0;
+    }
+    to {
+        padding-top: 50px;
+    }
+}
+
+@keyframes collapse-content {
+    from {
+        padding-top: 65px;
+    }
+    to {
+        padding-top: 15px;
+    }
+}
+
+@keyframes expanded-content {
+    from {
+        padding-top: 15px;
+    }
+    to {
+        padding-top: 65px;
+    }
+}

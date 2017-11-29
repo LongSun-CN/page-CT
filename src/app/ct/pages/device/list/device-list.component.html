@@ -1,0 +1,330 @@
+<section class="content-header">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border">
+                    <ol class="breadcrumb">
+                        <li><a [routerLink]="['device/list']"><i class="fa fa-home"></i>首页</a></li>
+                        <li><a><i class="fa fa-link"></i>设备列表</a></li>
+                    </ol>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display:block;">
+                    <div class="toolbar">
+                        <!--<form class="form-inline" role="form">-->
+                            <gw-toolbar #bar>
+                                <gw-input #gwcontrol #input
+                                          [label]="'设备编号'"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="true"
+                                          [(ngModel)]="inputSelectModel"
+                                          [selectData]="rangeSelectData">
+                                </gw-input>
+                                <gw-input #gwcontrol #input
+                                          [label]="'唯一标识'"
+                                          [(ngModel)]="inputModel"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                >
+                                </gw-input>
+                                <gw-input #gwcontrol #input
+                                          [label]="'设备id'"
+                                          [(ngModel)]="inputModel"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                >
+                                </gw-input>
+                                <gw-input #gwcontrol #input
+                                          [label]="'设备名称'"
+                                          [(ngModel)]="criteria.name"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                >
+                                </gw-input>
+                                {{criteria.name}}
+                                <gw-input #gwcontrol #input
+                                          [label]="'设备型号'"
+                                          [(ngModel)]="inputModel"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                >
+                                </gw-input>
+                            </gw-toolbar>
+                        <!--</form>-->
+                    </div>
+
+                    <div class="table-responsive">
+                        <ourpalm-table [table]="table">
+                            <!--<ourpalm-table-column [column]="{header: '选择列', field: 'checkbox', checkbox: true}"></ourpalm-table-column>-->
+                            <ourpalm-table-column
+                                [column]="{header: '序号', field: 'rownumbers', rownumbers: true, show: false}"></ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备编号', field: 'num'}">
+                                <ng-template let-row="$row">
+                                    {{row.num}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '唯一标识', field: 'identifier'}">
+                                <ng-template let-row="$row">
+                                    {{row.identifier}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: '设备id', field: 'id'}">
+                                <ng-template let-row="$row">
+                                    {{row.id}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备名称', field: 'name'}">
+                                <ng-template let-row="$row">
+                                    {{row.name}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备型号', field: 'model'}">
+                                <ng-template let-row="$row">
+                                    {{row.model}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备品牌', field: 'brand'}">
+                                <ng-template let-row="$row">
+                                    {{row.brand}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: '厂商', field: 'manufacturer'}">
+                            <ng-template let-row="$row">
+                                {{row.manufacturer}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '内核版本', field: 'kernelversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.kernelversion}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '构建版本', field: 'buildversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.buildversion}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: 'api版本', field: 'apilevel'}">
+                                <ng-template let-row="$row">
+                                    {{row.apilevel}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '系统版本', field: 'systemversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.systemversion}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '系统类型', field: 'systemtype'}">
+                                <ng-template let-row="$row">
+                                    {{row.systemtype == 0 ? "安卓":"IOS"}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '分辨率', field: 'resolution'}">
+                                <ng-template let-row="$row">
+                                    {{row.resolution}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '屏幕尺寸', field: 'screensize'}">
+                                <ng-template let-row="$row">
+                                    {{row.screensize}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: 'cpu频率', field: 'cpurate'}">
+                            <ng-template let-row="$row">
+                                {{row.cpurate}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'cpu类型', field: 'cputype'}">
+                                <ng-template let-row="$row">
+                                    {{row.cputype}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'MAC地址', field: 'mac'}">
+                                <ng-template let-row="$row">
+                                    {{row.mac}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'IDFA地址', field: 'idfa'}">
+                                <ng-template let-row="$row">
+                                    {{row.idfa}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: '状态', field: 'status'}">
+                                <ng-template let-row="$row">
+                                    {{row.status}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: '创建时间', field: 'createtime'}">
+                            <ng-template let-row="$row">
+                                {{row.createtime}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '更新时间', field: 'updatetime'}">
+                                <ng-template let-row="$row">
+                                    {{row.updatetime}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '描述', field: 'description'}">
+                                <ng-template let-row="$row">
+                                    {{row.description}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                        </ourpalm-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" bsModal #importModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content modal-center modal-center-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="importModal.hide()">
+                    <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">设备详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="param_table" *ngIf="deviceDetail">
+                    <div class="param-proname">设备名称： {{deviceDetail.name}}</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">基本信息</th>
+                            <td>
+                                <div class="param_content">
+                                    <ul class="category_param_list">
+                                        <li><span id="newPmName_identifier" class="param-name">设备标识</span><span
+                                            id="newPmVal_identifier">{{deviceDetail.identifier}}</span>
+                                        </li>
+                                        <li><span id="newPmName_id" class="param-name">设备id</span><span
+                                            id="newPmVal_id">{{deviceDetail.id}}</span>
+                                        </li>
+                                        <li><span id="newPmName_model" class="param-name">设备型号</span><span
+                                            id="newPmVal_model">{{deviceDetail.model}}</span>
+                                        </li>
+                                        <li><span id="newPmName_brand" class="param-name">设备品牌</span><span
+                                            id="newPmVal_brand">{{deviceDetail.brand}}</span>
+                                        </li>
+                                        <li><span id="newPmName_manufacturer" class="param-name">厂商</span><span
+                                            id="newPmVal_manufacturer">{{deviceDetail.manufacturer}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">系统</th>
+                            <td>
+                                <div class="param_content">
+                                    <ul class="category_param_list">
+                                        <li><span id="newPmName_systemtype" class="param-name">系统类型</span><span
+                                            id="newPmVal_systemtype">{{deviceDetail.systemtype == 0 ? "安卓":"IOS"}}</span>
+                                        </li>
+                                        <li><span id="newPmName_systemversion" class="param-name">系统版本</span><span
+                                            id="newPmVal_systemversion">{{deviceDetail.systemversion}}</span>
+                                        </li>
+                                        <li><span id="newPmName_apilevel" class="param-name">api版本</span><span
+                                            id="newPmVal_apilevel">{{deviceDetail.apilevel}}</span>
+                                        </li>
+                                        <li><span id="newPmName_buildversion" class="param-name">构建版本</span><span
+                                            id="newPmVal_buildversion">{{deviceDetail.buildversion}}</span>
+                                        </li>
+                                        <li><span id="newPmName_kernelversion" class="param-name">内核版本</span><span
+                                            id="newPmVal_kernelversion">{{deviceDetail.kernelversion}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">屏幕</th>
+                            <td>
+                                <div class="param_content">
+                                    <ul class="category_param_list">
+                                        <li><span id="newPmName_screensize" class="param-name">屏幕尺寸</span><span
+                                            id="newPmVal_screensize">{{deviceDetail.screensize}}</span>
+                                        </li>
+                                        <li><span id="newPmName_resolution" class="param-name">分辨率</span><span
+                                            id="newPmVal_resolution">{{deviceDetail.resolution}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">硬件</th>
+                            <td>
+                                <div class="param_content">
+                                    <ul class="category_param_list">
+                                        <li><span id="newPmName_cputype" class="param-name">cpu类型</span><span
+                                            id="newPmVal_cputype">{{deviceDetail.cputype}}</span>
+                                        </li>
+                                        <li><span id="newPmName_cpurate" class="param-name">cpu频率</span><span
+                                            id="newPmVal_cpurate">{{deviceDetail.cpurate}}</span>
+                                        </li>
+                                        <li><span id="newPmName_mac" class="param-name">MAC地址</span><span
+                                            id="newPmVal_mac">{{deviceDetail.mac}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">状态</th>
+                            <td>
+                                <div class="param_content">
+                                    <ul class="category_param_list">
+                                        <li><span id="newPmName_status" class="param-name">设备状态</span><span
+                                            id="newPmVal_status">{{deviceDetail.status}}</span>
+                                        </li>
+                                        <li><span id="newPmName_createtime" class="param-name">创建时间</span><span
+                                            id="newPmVal_createtime">{{deviceDetail.createtime}}</span>
+                                        </li>
+                                        <li><span id="newPmName_updatetime" class="param-name">更新时间</span><span
+                                            id="newPmVal_updatetime">{{deviceDetail.updatetime}}</span>
+                                        </li>
+                                        <li><span id="newPmName_description" class="param-name">描述</span><span
+                                            id="newPmVal_description">{{deviceDetail.description}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="importModal.hide()">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

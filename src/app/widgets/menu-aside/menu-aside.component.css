@@ -1,0 +1,12 @@
+.toggle-menu {
+    text-align: center;
+    color: #b8c7ce;
+    margin: 0;
+    padding: 10px 5px;
+    cursor: pointer;
+    background-color: #1E282E;
+}
+
+.toggle-menu:hover {
+    color: white;
+}

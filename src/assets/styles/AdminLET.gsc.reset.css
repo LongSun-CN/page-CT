@@ -1,0 +1,658 @@
+/* css reset */
+body {
+    /*font-family: 'Open Sans', sans-serif;*/
+    font-family: Lucida Grande, Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+    /*text-Shadow: 0 0 1px rgba(0, 0, 0, 0.2);*/
+    color: #58666e;
+    font-size: 13px;
+}
+
+.btn-default {
+    background-color: #F7F7F7;
+    border-radius: 2px;
+}
+
+.treeview-menu {
+    margin-top: -2px !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.main-footer {
+    text-align: center;
+}
+
+/* Form Control */
+.form-control {
+    background: #fff;
+    border: 1px solid #BDC4C9;
+    display: block;
+    box-shadow: inset 0px 1px 0px #F1F0F1;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+    font-size: inherit;
+}
+
+.form-control:focus {
+    background: #f7f7f7;
+    border-color: #BDC4C9;
+    box-shadow: none;
+    border-top: 1px solid #B7B7B7;
+}
+
+.main-header .logo {
+    padding: 0px;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    vertical-align: middle;
+    padding: 6px;
+}
+
+.glyphicon {
+    display: inline-block;
+    /*font-family: FontAwesome !important;*/
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: inherit;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
+
+/*.glyphicon-arrow-right::before {*/
+    /*content: "" !important;*/
+/*}*/
+
+/*.glyphicon-arrow-left::before {*/
+    /*content: "" !important;*/
+/*}*/
+
+.main-header {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.main-sidebar, .left-side {
+    position: fixed;
+}
+
+.content-header {
+    padding-top: 65px;
+}
+
+.content-header > .breadcrumb {
+    top: 65px;
+}
+
+.box-header {
+    padding: 6px;
+}
+/*.modal{*/
+    /*bottom: -800%;*/
+/*}*/
+
+/*.modal-center {*/
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*width: 90%;*/
+    /*max-width: 600px;*/
+    /*max-height: 90%;*/
+    /*overflow: auto;*/
+    /*border-radius: 4px;*/
+    /*transform: translate(-50%, -50%);*/
+/*}*/
+
+/*.modal-center-lg {*/
+    /*max-width: 800px !important;*/
+/*}*/
+
+/*.modal-center-sm {*/
+    /*max-width: 400px !important;*/
+/*}*/
+
+.inline-control {
+    width: 75%;
+}
+
+.inline-label {
+    width: 25%;
+    padding-top: 6px;
+    padding-right: 5px;
+    float: left;
+}
+
+.bootstrap-tagsinput {
+    width: 100%;
+    border-radius: 0px !important;
+}
+
+.bootstrap-tagsinput .label {
+    font-size: 100%;
+}
+
+table td, table th {
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /*省略号*/
+}
+
+.tooltip-inner {
+    word-break: break-all; /*只对英文起作用，以字母作为换行依据。*/
+    word-wrap: break-word; /*只对英文起作用，以单词作为换行依据。*/
+    white-space: pre-wrap; /*只对中文起作用，强制换行。*/
+    max-width: 400px !important;
+}
+
+/*  ourpalm-table-pager */
+.ourpalm-table-pager {
+    padding: 2px 4px;
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+}
+
+.ourpalm-table-pager:hover {
+    opacity: 0.6;
+}
+
+.ourpalm-table-pager:disabled {
+    opacity: 0.8;
+    cursor: default;
+}
+
+.ourpalm-dialog {
+    position: fixed;
+    /*width: 30%;*/
+    /*height: 30%;*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2001;
+}
+
+.ourpalm-mask {
+    position: fixed;
+    width: 100%;
+    height: 800%;
+    top: 0px;
+    left: 0px;
+    background-color: #000000;
+    opacity: 0.3;
+    z-index: 2000;
+}
+
+.ourpalm-table-header-sort a {
+    color: #58666e;
+    text-decoration: none;
+}
+
+.ourpalm-table-header-sort a:hover {
+    text-decoration: underline;
+}
+
+.ourpalm-table-column {
+    max-width: 500px !important;
+    min-width: 400px !important;
+}
+
+.ourpalm-table-column .modal-body {
+    text-align: left;
+}
+
+.ourpalm-table-column .checkbox-inline {
+    width: 25%;
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden;
+}
+
+.ourpalm-table-column .checkbox-inline + .checkbox-inline {
+    margin-left: 0px;
+}
+
+.bootstrap-tagsinput input {
+    width: inherit;
+    min-width: 50px;
+}
+
+.bootstrap-tagsinput .tag {
+    display: inline-block;
+}
+
+.label-sm {
+    font-size: 8px !important;
+    padding: 1px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.box-comments .box-comment img, .box-comment img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 300px !important;
+    max-height: 500px !important;
+}
+
+.box-comments p {
+    display: table-row;
+}
+
+.box-comments .box-comment img.img-circle {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.loadMore {
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.loadMore:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a {
+    cursor: pointer;
+}
+
+.table td, .table th {
+    max-width: 300px;
+}
+
+.no-radius {
+    border-radius: 0px !important;
+}
+
+.form-inline .form-group {
+    margin-top: 5px;
+}
+
+.tooltip.img-hover .tooltip-inner {
+    padding: 0px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .75);
+}
+
+/* Hide arrow */
+.tooltip.img-hover .tooltip-arrow {
+    display: none;
+}
+
+.tooltip.in {
+    opacity: 1;
+}
+
+.valign-center {
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -70%) !important;
+}
+
+/*  表单内2列排列效果*/
+.form-two-column .form-group {
+    width: 46%;
+    float: left;
+    margin-left: 10px;
+}
+
+.form-two-column .form-group label {
+    width: 33%;
+    float: left;
+    text-algin: center;
+    padding-right: 15px;
+}
+
+.form-two-column .form-group div.dynamicContent {
+    width: 66%;
+}
+
+.form-two-column .form-group div.dropdown {
+    width: 100%;
+}
+
+.form-two-column .form-group.gap {
+    width: 97%;
+    background: #e8dede;
+    height: 1px;
+}
+
+.form-two-column .form-group div {
+    float: left !important;
+}
+
+.form-search-column .form-group label {
+    float: left;
+    text-algin: center;
+    padding-right: 6px;
+    line-height: 30px;
+}
+
+.form-search-column .form-group div {
+    float: left;
+    margin-right: 8px;
+}
+
+
+/**************bbs礼包拖拽*********************/
+.sortableUl{
+    margin-left: -10%;
+    width: 113%;
+}
+.sortableUl ol{
+    float: left;
+    width: 31%;
+    margin-right: 9px;
+    margin-bottom: 5px;
+    min-height: 22px;
+}
+.sortableUl ol:first-child{
+    margin-top: 5px;
+}
+.sortableUl ol i{
+    float: right;
+}
+
+/**************表单 单列对齐*********************/
+.form-one-column .form-group {
+    width: 100%;
+    float: left;
+    margin-left: 10px;
+}
+
+.form-one-column .form-group label {
+    width: 13%;
+    float: left;
+    text-algin: center;
+    padding-right: 15px;
+}
+
+.form-one-column .form-group div {
+    float: left;
+    width: 78%;
+}
+.form-one-column .form-group.gap {
+    width: 97%;
+    background: #e8dede;
+    height: 1px;
+}
+
+.ui-select-choices-row-inner:first-child{
+    width:400%!important;
+    height: 26px;
+}
+/**************表单 3列对齐*********************/
+.form-three-column .form-group {
+    width: 30%;
+    float: left;
+    margin-left: 10px;
+}
+
+
+.form-three-column .form-group label {
+    width: 25%;
+    float: left;
+    text-algin: center;
+    padding-right: 8px;
+}
+
+.form-three-column .form-group div {
+    float: left;
+    width: 74%;
+}
+.form-three-column .form-group div.plusORminus input{
+    float: left;width: 78%;
+}
+.form-three-column .form-group div.plusORminus a{
+    margin-top: 6px;margin-left: 5px
+}
+
+ourpalm-products-auto .form-group   div.ui-select-choices-row,
+ourpalm-channel-auto .form-group  div.ui-select-choices-row,
+ourpalm-server-auto .form-group   div.ui-select-choices-row,
+ourpalm-vip-auto .form-group    div.ui-select-choices-row{
+    width:100%;
+}
+ourpalm-products-auto .form-group  span.ui-select-toggle,
+ourpalm-channel-auto .form-group  span.ui-select-toggle,
+ourpalm-server-auto .form-group  span.ui-select-toggle,
+ourpalm-vip-auto .form-group  span.ui-select-toggle{
+    width:188px;
+    height: 30px;
+}
+ourpalm-products-auto .form-group  input.ui-select-search,
+ourpalm-channel-auto .form-group  input.ui-select-search,
+ourpalm-server-auto .form-group  input.ui-select-search,
+ourpalm-vip-auto .form-group  input.ui-select-search{
+    width: 188px!important;
+    height: 30px;
+}
+
+.form-two-column ourpalm-products-auto .form-group  span.ui-select-toggle,
+.form-two-column ourpalm-channel-auto .form-group  span.ui-select-toggle,
+.form-two-column ourpalm-server-auto .form-group  span.ui-select-toggle,
+.form-two-column ourpalm-vip-auto .form-group  span.ui-select-toggle{
+    width: 227px;
+    height: 30px;
+}
+.form-two-column ourpalm-products-auto .form-group > div,
+.form-two-column ourpalm-channel-auto .form-group   > div,
+.form-two-column ourpalm-server-auto .form-group   > div,
+.form-two-column ourpalm-vip-auto .form-group   > div{
+    height: 31px;
+}
+
+.rebateAdd ourpalm-products-auto .form-group > div,
+.rebateAdd ourpalm-channel-auto .form-group   > div,
+.rebateAdd ourpalm-server-auto .form-group   > div,
+.rebateAdd ourpalm-vip-auto .form-group   > div{
+    height: 30px;
+}
+
+.form-two-column ourpalm-products-auto .form-group  input.ui-select-search,
+.form-two-column ourpalm-channel-auto .form-group  input.ui-select-search,
+.form-two-column ourpalm-server-auto .form-group  input.ui-select-search,
+.form-two-column ourpalm-vip-auto .form-group  input.ui-select-search{
+    width: 227px!important;
+    height: 30px;
+}
+
+.form-three-column ourpalm-products-auto .form-group  span.ui-select-toggle,
+.form-three-column ourpalm-channel-auto .form-group  span.ui-select-toggle,
+.form-three-column ourpalm-server-auto .form-group  span.ui-select-toggle,
+.form-three-column ourpalm-vip-auto .form-group  span.ui-select-toggle{
+    width: 170px;
+    height: 30px;
+}
+.form-three-column ourpalm-products-auto .form-group  input.ui-select-search,
+.form-three-column ourpalm-channel-auto .form-group  input.ui-select-search,
+.form-three-column ourpalm-server-auto .form-group  input.ui-select-search,
+.form-three-column ourpalm-vip-auto .form-group  input.ui-select-search{
+    width: 170px!important;
+    height: 30px;
+}
+.biggap{
+    width: 103%;
+    background: rgba(86, 87, 88, 0.21);
+    height: 22px;
+    margin-left: -13px;
+    padding-left: 37px;
+    padding-top: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.packageSwitch {
+    float: left;
+    width: 96%;
+}
+
+.is-pointer-down {
+    cursor: move;
+}
+
+.main-full-container {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    min-height: 250px;
+    max-height: 100%;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 0;
+    border: none;
+}
+
+.main-full-container ul.left-list {
+    margin-top: 10px;
+}
+
+.main-full-container ul.left-list li {
+    border: none;
+}
+
+.main-full-container ul.left-list li:hover {
+    background-color: #3C8DBC;
+    color: white;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.main-full-container ul.left-list li:first-child {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.main-full-container ul.left-list li:first-child:hover {
+    background-color: white;
+    color: black;
+    border-radius: 0;
+    cursor: default;
+}
+
+.game-product-open {
+    background-color: white !important;
+    color: black !important;
+    border: none !important;
+}
+
+.dropdown-menu > li > a {
+    padding: 5px 16px;
+}
+
+/****************
+ 查询条件对齐
+****/
+.form-mysSearch-column  .form-group {
+    width: 20%;
+    margin-left: 30px;
+}
+.form-mysSearch-rebateadd-column  .form-group {
+    width: 42%;
+}
+.form-mysSearch-column  .form-group label{
+    width: 25%;
+}
+.form-mysSearch-column  .form-group > div{
+    width: 70%;
+}
+.form-mysSearch-column  .form-group input.form-control,.form-mysSearch-column  .form-group select.form-control{
+    width: 74.5%;
+}
+
+.form-mysSearch-column  .pull-right a {
+    margin-left: 29%;
+}
+
+
+.form-mysSearch-column  span,.rebateAdd span{
+    height: 100%;
+}
+.form-mysSearch-column  div[autocomplete]  input,.rebateAdd  div[autocomplete]  input{
+    width: 107%!important;
+}
+
+.rebateAdd  ul.ui-select-choices{
+    width: 93%;
+}
+
+.rebateAdd  .form-group > input,.rebateAdd  .form-group > select{
+    width: 75%;
+}
+
+.rebateAdd  label.control-label{
+    width: 22%;
+}
+.rebateAdd  .form-group  i{
+    width: 22%;
+}
+
+
+.rebateStandard  label.control-label{
+    text-align: left!important;
+    width: 20%;
+}
+
+.productLabel .form-group > label{
+    width: 22%;
+}
+
+.addRebatePlus table td div.modal-body, .addRebatePlus table th div.modal-body{
+    white-space: initial;
+}
+
+.modal div[uib-popover-popup],.modal div[uib-tooltip-popup]{
+    left: 70%!important;
+}
+.form-group label{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vipManagerAdd   .form-group{
+    width: 93%!important;
+}
+.vipManagerTable div.ourpalm-dialog div.ourpalm-table-column{
+    max-width: 650px!important;
+}
+
+/*.modal-dialog.modal-lg{
+    top:5%!important;
+}
+.modal-content{
+    max-height: 590px;
+    overflow-y: auto;
+}*/
+
+div.ui-select-choices-row.active  a {
+  height: 25px;
+}
+
+ng-select div{
+  margin-right: 0px!important;
+}

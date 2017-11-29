@@ -1,0 +1,42 @@
+# Node
+node_modules
+npm-debug.log
+
+# DO NOT IGNORE TYPESCRIPT FILES FOR NPM
+# TypeScript
+# *.js
+# *.map
+# *.d.ts
+
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Project
+src
+test
+coverage
+typings
+compiled
+karma.conf.js
+webpack.config.js
+tslint.json
+tsconfig*.json
+rollup.config.js
+travis_after_all.py
+.codeclimate.yml
+.travis.yml
+.to_export_back
+*.deb
+scripts

@@ -1,0 +1,38 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar Menu -->
+        <p class="toggle-menu" data-toggle="offcanvas"><i class="fa fa-bars"></i></p>
+        <ul class="sidebar-menu">
+            <!--<li class="header">NAVIGATION</li>-->
+            <ng-template ngFor let-item [ngForOf]="links">
+                <ng-template [ngIf]="!item.children">
+                    <li>
+                        <a [routerLink]="item.path">
+                            <i class="{{item.icon}}"></i> <span>{{item.title}}</span>
+                        </a>
+                    </li>
+                </ng-template>
+                <ng-template [ngIf]="item.children">
+                    <li class="treeview">
+                        <a herf="javascript:void(0);">
+                            <i *ngIf="item.icon" class="{{item.icon}}"></i> <span>{{item.title}}</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <ng-template ngFor let-subitem [ngForOf]="item.children">
+                                <li>
+                                    <a [routerLink]="subitem.path">
+                                        <i *ngIf="subitem.icon" class="{{subitem.icon}}"></i> <span>{{subitem.title}}</span>
+                                    </a>
+                            </ng-template>
+                        </ul>
+                    </li>
+                </ng-template>
+            </ng-template>
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

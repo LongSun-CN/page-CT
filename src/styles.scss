@@ -1,0 +1,146 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/css/font-awesome.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "assets/styles/AdminLTE.css";
+@import "../node_modules/admin-lte/dist/css/skins/skin-blue.css";
+@import "../node_modules/angular2-toaster/toaster.css";
+@import "../node_modules/bootstrap-daterangepicker/daterangepicker.css";
+//loading
+@import "assets/styles/loading.css";
+//tabs
+@import "assets/styles/tabs-reset.css";
+//ng2-select
+@import "assets/styles/ng2-select.reset.css";
+@import "assets/styles/AdminLET.gsc.reset.css";
+/* 去除圆角 */
+@import "assets/styles/no-border-radius.css";
+@import "assets/styles/scrollbar.css";
+@import "assets/styles/top-collapse.css";
+
+.input-daterange {
+    min-width: 200px;
+}
+
+.input-daterange-lg {
+    min-width: 265px;
+}
+
+/* 使用tooltip去展示图片 */
+.tooltip.tooltip-img .tooltip-inner {
+    padding: 0px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .75);
+}
+
+/* 使用tooltip去展示图片 Hide arrow */
+.tooltip.tooltip-img .tooltip-arrow {
+    display: none;
+}
+
+.tooltip-inner {
+    white-space: normal !important;
+}
+
+.toast-close-button {
+    margin-top: -0.6em;
+}
+
+/******
+礼包码页面tag插件样式修改
+ */
+//.package-addmodal .mytag{
+//  width: 347%;
+//}
+.package-addmodal tag-input div:first-child {
+    width: 100%;
+}
+
+.content-header .toolbar {
+    display: inline-block;
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.content-header .box-header .breadcrumb {
+    margin: 0;
+    padding: 0 5px;
+    background-color: transparent;
+}
+
+.content-header .box-header .breadcrumb > li + li:before {
+    color: #000;
+    content: ">\A0";
+}
+
+table.floatThead-table thead tr {
+    background-color: #eee;
+}
+
+.control-sidebar-bg, .control-sidebar {
+    width: 250px;
+    right: -250px;
+}
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .main-header .navbar {
+        margin-left: 0 !important;
+    }
+}
+
+.main-header .navbar {
+    margin-left: 0 !important;
+}
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .main-header .logo {
+        width: 230px;
+        background-color: #3c8dbc;
+    }
+}
+
+.skin-blue .main-header .logo {
+    background-color: #3c8dbc;
+}
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .main-sidebar {
+        width: 30px !important;
+    }
+}
+
+.sidebar-menu > li > a {
+    padding: 12px 5px 12px 6px;
+}
+
+/*
+ * Component: Sidebar Mini
+ */
+@media (min-width: 768px) {
+    .sidebar-mini.sidebar-collapse .content-wrapper,
+    .sidebar-mini.sidebar-collapse .main-footer,
+    .sidebar-mini.sidebar-collapse .right-side {
+        margin-left: 30px !important;
+    }
+
+    .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
+    .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+        left: 30px;
+    }
+}
+
+.sidebar-mini .toggle-menu i {
+    transform: rotate(-90deg);
+}
+
+.sidebar-mini.sidebar-collapse .toggle-menu i {
+    transform: rotate(0deg);
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        margin: 10px auto;
+    }
+}
+
+.sidebar-mini.sidebar-collapse .content-wrapper.no-margin, .sidebar-mini.sidebar-collapse .main-footer.no-margin {
+    margin: 0 !important;
+}

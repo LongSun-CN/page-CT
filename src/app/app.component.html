@@ -1,0 +1,18 @@
+<div class="wrapper" *ngIf="initialized">
+
+    <app-header>header...</app-header>
+    <app-menu-aside *ngIf="mylinks.length > 0" [links]="mylinks">menu...</app-menu-aside>
+
+    <toaster-container [toasterconfig]="toastConfig"></toaster-container>
+    <ourpalm-loading></ourpalm-loading>
+
+    <!-- Content Wrapper. Contapagespage content -->
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- /.content-wrapper -->
+    <app-footer [links]="mylinks">footer...</app-footer>
+    <!--<app-aside>control sidebar...</app-aside>-->
+
+</div>
+

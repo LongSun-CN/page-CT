@@ -1,0 +1,181 @@
+<section class="content-header">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default box-solid" *ngIf="name">
+                <div class="box-header with-border">
+                    <ol class="breadcrumb">
+                        <li><a [routerLink]="['device/list']"><i class="fa fa-home"></i>设备列表</a></li>
+                        <li><a><i class="fa fa-link"></i>云真机</a></li>
+                    </ol>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display:block;">
+                    <div class="main">
+                        <div class="content-box">
+                            <div class="side-l"><a href="#" title="返回" class="back"><em></em><i>返回</i></a>
+                                <div class="phonevideo">
+                                    <div class="title">{{name}}</div>
+                                    <div id="videodiv"><img
+                                        src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png"
+                                        id="remoteloading"></div>
+                                    <div class="videobarbox">
+                                        <li class="btn1 on"><em></em><i>翻转</i></li>
+                                        <li class="btn2"><em></em><i>截图</i></li>
+                                        <li class="btn3"><em class="step1"></em><em class="step2"></em><em
+                                            class="step3"></em></li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="side-r">
+                                <ul class="nav nav-justified">
+                                    <li class="active">
+                                        <a href="#device-operate-tab1" data-toggle="tab">
+                                            安装APK
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#device-operate-tab2" data-toggle="tab">
+                                            性能数据
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#device-operate-tab3" data-toggle="tab">
+                                            实时日志
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <!--安装apk-->
+                                    <div class="tab tab-pane active" id="device-operate-tab1">
+                                        <div class="upload"><em></em><i>上传APK，或拖拽APP至此</i>
+                                            <input type="file" name="files" class="apkfileupload" data-type="apk"
+                                                   value="">
+                                        </div>
+                                        <div class="text">
+                                            <P>历史应用：</P>
+                                            <dl>
+                                                <dt><img
+                                                    src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png"
+                                                    width="60" height="60"></dt>
+                                                <dd>
+                                                    <P>TestS8 上传日期：2017-04-17 18:36:40</P>
+                                                    <P>版本：2.2 大小：14.7M</P>
+                                                </dd>
+                                                <a href="#" class="btn" title="安装">安装</a>
+                                            </dl>
+                                            <dl>
+                                                <dt><img
+                                                    src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png"
+                                                    width="60" height="60"></dt>
+                                                <dd>
+                                                    <P>TestS8 上传日期：2017-04-17 18:36:40</P>
+                                                    <P>版本：2.2 大小：14.7M</P>
+                                                </dd>
+                                                <a href="#" class="btn" title="安装">安装</a>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <!--性能数据-->
+                                    <div class="tab tab-pane data" id="device-operate-tab2">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <td colspan="2">cpu占用率</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <td colspan="2">cpu占用率</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>时数值</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--实时日志-->
+                                    <div class="tab tab-pane log" id="device-operate-tab3">
+                                        <ul>
+                                            <li>
+                                                <label>日志等级：</label>
+                                                <input type="text">
+                                            </li>
+                                            <li>
+                                                <label>日志过滤：</label>
+                                                <input type="text">
+                                            </li>
+                                        </ul>
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <td>时间</td>
+                                                <td>PID</td>
+                                                <td>TAG</td>
+                                                <td>日志内容</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>时间</td>
+                                                <td>PID</td>
+                                                <td>TAG</td>
+                                                <td>日志内容</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <ul class="bottom">
+                                    <li class="list1"><a href="javascript:void(0);"
+                                                         title="wifi设置"><em></em><i>wifi设置</i></a></li>
+                                    <li class="list2"><a href="javascript:void(0);" title="摄像头"><em></em><i>摄像头</i></a>
+                                    </li>
+                                    <li class="list3"><a href="javascript:void(0);"
+                                                         title="打开指定地址"><em></em><i>打开指定地址</i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
