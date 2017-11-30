@@ -6,7 +6,6 @@ import {HttpService} from "../../../../shared/services/httpx.service";
 import {ToastService} from "../../../../shared/services/toast.service";
 import {ModalDirective} from "ngx-bootstrap";
 import {Router, ActivatedRoute} from "@angular/router";
-import {RequestOptions} from "@angular/http";
 
 @Component({
     selector: 'device-list',
@@ -83,7 +82,8 @@ export class DeviceListComponent {
             cachePageSize: true,
             autoLoadData: true,
             selectOnCheck: false,
-            singleSelect: true,
+            checkOnSelect: false,
+            singleSelect: false,
             loadData: (table: OurpalmTable/*, callback: (page: Page) => {}*/) => {
                 this.onSearch(table.currentPage);
             },
@@ -284,8 +284,6 @@ export class DeviceListComponent {
                 mac: this.criteria.mac
             }
         }
-        console.log(this.queryCondition);
-        console.log(this.criteria);
 
         this.onSearch(this.table.currentPage);
     }

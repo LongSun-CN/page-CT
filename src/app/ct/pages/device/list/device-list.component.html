@@ -14,119 +14,117 @@
                 </div>
                 <div class="box-body" style="display:block;">
                     <div class="toolbar">
-                        <!--<form class="form-inline" role="form">-->
-                            <gw-toolbar #bar>
-                                <gw-input #gwcontrol #input
-                                          [label]="'设备编号'"
-                                          [(ngModel)]="criteria.num"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="true"
-                                          [selectData]="rangeSelectData"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'唯一标识'"
-                                          [(ngModel)]="criteria.identifier"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'设备id'"
-                                          [(ngModel)]="criteria.id"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'设备名称'"
-                                          [(ngModel)]="criteria.name"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'设备型号'"
-                                          [(ngModel)]="criteria.brand"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'厂商'"
-                                          [(ngModel)]="criteria.manufacturer"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-input #gwcontrol #input
-                                          [label]="'api版本'"
-                                          [(ngModel)]="criteria.apilevel"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="true"
-                                          [selectData]="rangeSelectData"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                                <gw-single-select #gwcontrol #input
-                                          [label]="'系统类型'"
-                                          [(ngModel)]="criteria.systemtype"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          [data]="systemTypeSelectData"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-single-select>
-                                <gw-single-select #gwcontrol #input
-                                          [label]="'分辨率'"
-                                          [(ngModel)]="criteria.resolution"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          [data]="resolutionSelectData"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-single-select>
-                                <gw-single-select #gwcontrol #input
-                                          [label]="'设备状态'"
-                                          [(ngModel)]="criteria.status"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          [data]="statusSelectData"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-single-select>
-                                <gw-input #gwcontrol #input
-                                          [label]="'MAC地址'"
-                                          [(ngModel)]="criteria.mac"
-                                          [closeable]="true"
-                                          [enabled]="true"
-                                          [showSelect]="false"
-                                          (ngModelChange)="saveQueryCondition()"
-                                >
-                                </gw-input>
-                            </gw-toolbar>
-                        <!--</form>-->
+                        <gw-toolbar #bar>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备编号'"
+                                      [(ngModel)]="criteria.num"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="true"
+                                      [selectData]="rangeSelectData"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'唯一标识'"
+                                      [(ngModel)]="criteria.identifier"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备id'"
+                                      [(ngModel)]="criteria.id"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备名称'"
+                                      [(ngModel)]="criteria.name"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备型号'"
+                                      [(ngModel)]="criteria.brand"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'厂商'"
+                                      [(ngModel)]="criteria.manufacturer"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'api版本'"
+                                      [(ngModel)]="criteria.apilevel"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="true"
+                                      [selectData]="rangeSelectData"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'系统类型'"
+                                              [(ngModel)]="criteria.systemtype"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="systemTypeSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'分辨率'"
+                                              [(ngModel)]="criteria.resolution"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="resolutionSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'设备状态'"
+                                              [(ngModel)]="criteria.status"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="statusSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-input #gwcontrol #input
+                                      [label]="'MAC地址'"
+                                      [(ngModel)]="criteria.mac"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                        </gw-toolbar>
                     </div>
 
                     <div class="table-responsive">
                         <ourpalm-table [table]="table">
-                            <!--<ourpalm-table-column [column]="{header: '选择列', field: 'checkbox', checkbox: true}"></ourpalm-table-column>-->
+                            <ourpalm-table-column [column]="{header: '选择列', field: 'checkbox', checkbox: true}"></ourpalm-table-column>
                             <ourpalm-table-column
                                 [column]="{header: '序号', field: 'rownumbers', rownumbers: true, show: false}"></ourpalm-table-column>
                             <ourpalm-table-column [column]="{header: '设备编号', field: 'num'}">
@@ -249,7 +247,6 @@
 
 <div class="modal fade" bsModal #importModal="bs-modal">
     <div class="modal-dialog">
-
         <div class="modal-content modal-center modal-center-lg">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -382,13 +379,78 @@
                         </tr>
                         </tbody>
                     </table>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colspan="1">设备属性</th>
+                            <td>
+                                <div class="param_content">
+                                    <form class="form-horizontal">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">所属设备组</label>
+                                                <div class="col-sm-6">
+                                                <select class="form-control">
+                                                    <option>top 3</option>
+                                                    <option>top 10</option>
+                                                    <option>top 30</option>
+                                                    <option>top 60</option>
+                                                    <option>top 100</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">所属机柜组</label>
+                                                <div class="col-sm-6">
+                                                <select class="form-control">
+                                                    <option>2-3-1</option>
+                                                    <option>2-3-2</option>
+                                                    <option>2-3-3</option>
+                                                    <option>2-4-1</option>
+                                                    <option>2-4-2</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">设备编号</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control input-sm" placeholder="设备编号"
+                                                           [(ngModel)]="deviceDetail.num" name="num">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">唯一标识</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control input-sm" placeholder="唯一标识" [(ngModel)]="deviceDetail.identifier" name="identifier">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">屏幕尺寸</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control input-sm" placeholder="屏幕尺寸" [(ngModel)]="deviceDetail.screensize" name="screensize">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">
+                                                    设备描述
+                                                </label>
+                                                <div class="col-sm-6">
+                                                <textarea [(ngModel)]="deviceDetail.description" rows="5"
+                                                          class="form-control input-sm" name="description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="importModal.hide()">确定</button>
+                <button type="button" class="btn btn-block btn-primary" (click)="importModal.hide()">确定</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
