@@ -26,8 +26,8 @@ export class DeviceListComponent {
         systemtype: '',
         resolution: '',
         status: '',
+        mac: '',
     };
-
     queryCondition = {
         equal: {},
         largerThan: {},
@@ -36,13 +36,11 @@ export class DeviceListComponent {
         orderByDesc: {},
         blurQuery: {}
     };
-
     rangeSelectData = [
         {id: '0', text: '等于'},
         {id: '1', text: '大于'},
         {id: '2', text: '小于'}
     ];
-
     systemTypeSelectData = [
         {id: '0', text: '安卓'},
         {id: '1', text: 'IOS'},
@@ -65,6 +63,7 @@ export class DeviceListComponent {
     currentPage: number;
     deviceDetail: any;
 
+    //设备详情模态框
     @ViewChild('importModal')
     importModal: ModalDirective;
 
@@ -112,6 +111,7 @@ export class DeviceListComponent {
 
     }
 
+    //分页数据查询
     onSearch(currentPage: number = 1) {
         this.httpService
             .get(environment.getUrl('devices/page'), {
@@ -138,11 +138,13 @@ export class DeviceListComponent {
             });
     }
 
+    //打开设备详情模态框
     openDetailModal() {
         this.loadDetail(this.table.getSelectedRows()[0].id);
         this.importModal.show();
     }
 
+    //跳转到云真机页面
     navigateToDevieOperate() {
         const device = this.table.getSelectedRows()[0];
         this.router.navigate(['../operate'], {
@@ -154,6 +156,7 @@ export class DeviceListComponent {
         });
     }
 
+    //获取设备详情
     loadDetail(id: String) {
         this.httpService
             .get(environment.getUrl('device/' + id))
@@ -168,6 +171,7 @@ export class DeviceListComponent {
             });
     }
 
+    //处理页面查询条件
     saveQueryCondition() {
         //清空查询条件
         this.queryCondition.equal = {};
@@ -271,6 +275,13 @@ export class DeviceListComponent {
             this.queryCondition.equal = {
                 ...this.queryCondition.equal,
                 status: this.criteria.status
+            }
+        }
+        //mac地址
+        if (this.criteria.mac) {
+            this.queryCondition.blurQuery = {
+                ...this.queryCondition.blurQuery,
+                mac: this.criteria.mac
             }
         }
         console.log(this.queryCondition);

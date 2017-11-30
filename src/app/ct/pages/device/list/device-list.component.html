@@ -111,6 +111,15 @@
                                           (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-single-select>
+                                <gw-input #gwcontrol #input
+                                          [label]="'MAC地址'"
+                                          [(ngModel)]="criteria.mac"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
+                                </gw-input>
                             </gw-toolbar>
                         <!--</form>-->
                     </div>
