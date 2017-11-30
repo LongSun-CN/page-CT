@@ -18,26 +18,30 @@
                             <gw-toolbar #bar>
                                 <gw-input #gwcontrol #input
                                           [label]="'设备编号'"
+                                          [(ngModel)]="criteria.num"
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="true"
-                                          [(ngModel)]="inputSelectModel"
-                                          [selectData]="rangeSelectData">
+                                          [selectData]="rangeSelectData"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
                                 </gw-input>
                                 <gw-input #gwcontrol #input
                                           [label]="'唯一标识'"
-                                          [(ngModel)]="inputModel"
+                                          [(ngModel)]="criteria.identifier"
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-input>
                                 <gw-input #gwcontrol #input
                                           [label]="'设备id'"
-                                          [(ngModel)]="inputModel"
+                                          [(ngModel)]="criteria.id"
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-input>
                                 <gw-input #gwcontrol #input
@@ -46,25 +50,67 @@
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-input>
-                                {{criteria.name}}
                                 <gw-input #gwcontrol #input
                                           [label]="'设备型号'"
-                                          [(ngModel)]="inputModel"
+                                          [(ngModel)]="criteria.brand"
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-input>
                                 <gw-input #gwcontrol #input
                                           [label]="'厂商'"
-                                          [(ngModel)]="inputModel"
+                                          [(ngModel)]="criteria.manufacturer"
                                           [closeable]="true"
                                           [enabled]="true"
                                           [showSelect]="false"
+                                          (ngModelChange)="saveQueryCondition()"
                                 >
                                 </gw-input>
+                                <gw-input #gwcontrol #input
+                                          [label]="'api版本'"
+                                          [(ngModel)]="criteria.apilevel"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="true"
+                                          [selectData]="rangeSelectData"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
+                                </gw-input>
+                                <gw-single-select #gwcontrol #input
+                                          [label]="'系统类型'"
+                                          [(ngModel)]="criteria.systemtype"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                          [data]="systemTypeSelectData"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
+                                </gw-single-select>
+                                <gw-single-select #gwcontrol #input
+                                          [label]="'分辨率'"
+                                          [(ngModel)]="criteria.resolution"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                          [data]="resolutionSelectData"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
+                                </gw-single-select>
+                                <gw-single-select #gwcontrol #input
+                                          [label]="'设备状态'"
+                                          [(ngModel)]="criteria.status"
+                                          [closeable]="true"
+                                          [enabled]="true"
+                                          [showSelect]="false"
+                                          [data]="statusSelectData"
+                                          (ngModelChange)="saveQueryCondition()"
+                                >
+                                </gw-single-select>
                             </gw-toolbar>
                         <!--</form>-->
                     </div>
@@ -164,9 +210,9 @@
                                     {{row.idfa}}
                                 </ng-template>
                             </ourpalm-table-column>&ndash;&gt;
-                            <ourpalm-table-column [column]="{header: '状态', field: 'status'}">
+                            <ourpalm-table-column [column]="{header: '设备状态', field: 'status'}">
                                 <ng-template let-row="$row">
-                                    {{row.status}}
+                                    {{row.status == 0? '离线':'在线'}}
                                 </ng-template>
                             </ourpalm-table-column>
                             &lt;!&ndash;<ourpalm-table-column [column]="{header: '创建时间', field: 'createtime'}">
