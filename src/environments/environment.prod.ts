@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
     hmr: false,
-    basePath: '//localhost:8080/autotesting/',
+    basePath: '//10.2.44.18:8082/autotesting/',
     getUrl: (relativeUrl: string) => {
         return environment.basePath + relativeUrl;
     },

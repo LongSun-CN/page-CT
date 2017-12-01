@@ -25,6 +25,7 @@ export class DeviceListComponent {
         systemtype: '',
         resolution: '',
         status: '',
+        isOnline: '',
         mac: '',
     };
     queryCondition = {
@@ -45,6 +46,10 @@ export class DeviceListComponent {
         {id: '1', text: 'IOS'},
     ];
     statusSelectData = [
+        {id: '0', text: '空闲中'},
+        {id: '1', text: '使用中'},
+    ];
+    isOnlineSelectData = [
         {id: '0', text: '离线'},
         {id: '1', text: '在线'},
     ];
@@ -288,11 +293,18 @@ export class DeviceListComponent {
                 resolution: this.criteria.resolution
             }
         }
-        //分辨率
+        //设备状态
         if (this.criteria.status) {
             this.queryCondition.equal = {
                 ...this.queryCondition.equal,
                 status: this.criteria.status
+            }
+        }
+        //在线状态
+        if (this.criteria.isOnline) {
+            this.queryCondition.equal = {
+                ...this.queryCondition.equal,
+                isOnline: this.criteria.isOnline
             }
         }
         //mac地址
@@ -361,6 +373,8 @@ export class DeviceListComponent {
                         this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
                     }
                 });
+
+                this.onSearch(this.table.currentPage);
             }
 
         }

@@ -18,6 +18,7 @@ import {CTModule} from "./ct/ct.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {RouterModule} from '@angular/router';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, URLInterceptor: ServerURLInterceptor, MaskInterceptor: ServerMaskInterceptor, ManageredLocalStorageInterceptor: CachedHttpInterceptor) {
     let service = new InterceptorService(xhrBackend, requestOptions);
@@ -62,7 +63,8 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
             provide: InterceptorService,
             useFactory: interceptorFactory,
             deps: [XHRBackend, RequestOptions, ServerURLInterceptor, ServerMaskInterceptor, CachedHttpInterceptor]
-        }
+        },
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]
 })

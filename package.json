@@ -8,7 +8,7 @@
     "start": "ng serve --host 0.0.0.0 --port 8000 --disable-host-check",
     "hmr": "ng serve --host test.gamebean.com --port 8000 --hmr -e=hmr",
     "start:aot": "ng serve --aot --host test.gamebean.com --port 8000",
-    "build": "ng build --aot --prod --base-href /",
+    "build": "ng build --aot --prod --base-href /ct/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
