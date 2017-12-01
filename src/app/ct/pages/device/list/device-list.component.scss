@@ -108,10 +108,10 @@
 .param_content_add td{
     vertical-align: middle;
 }
-.add-modal-footer-btn{
+.install-modal-footer-btn{
     text-align: center;
 }
-.add-modal-footer-btn button{
+.install-modal-footer-btn button{
     letter-spacing:5px;
     font-size: 15px !important;
 }
@@ -124,7 +124,14 @@
     margin: 5px;
 }
 .tab-content .box-pane ol li button{
-   background-color: whitesmoke;
     vertical-align: middle;
     margin: 5px;
 }
+.box-body-top-tool{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.box-body-top-tool button{
+    background-color: #337ab7;
+}
+
