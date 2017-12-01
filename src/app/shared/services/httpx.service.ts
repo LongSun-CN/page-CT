@@ -62,26 +62,6 @@ export class HttpService {
         return this.http.post(url, body, options);
     }
 
-    put(url: string, params: any = {}, options?: RequestOptions): Observable<Response> {
-        console.log('[HttpService PUT]', arguments);
-        if (!options) {
-            options = new RequestOptions();
-            options.withCredentials = this.withCredentials;
-            options.headers = new Headers({
-                ...this.headers,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            });
-        }
-        let body: string = '';
-        for (let key in params) {
-            body += `${key}=${(!params[key]&&params[key]!==false)?'':params[key]}&`;
-        }
-        body = body.substr(0, body.length - 1);
-        return this.http.put(url, body, options);
-    }
-
-
-
     download(url: string, params: any = {}) {
         console.log('[HttpService Download]', arguments);
         let paramUrl: string = '';
