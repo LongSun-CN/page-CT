@@ -356,6 +356,7 @@ export class DeviceListComponent {
                     console.log(result);
                     if (result.status == '1') {
                         this.toastService.pop("success", '成功',addDevice_num+'设备添加成功');
+                        this.importAddDeviceModal.hide();
                     } else {
                         this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
                     }
@@ -363,7 +364,6 @@ export class DeviceListComponent {
             }
 
         }
-        this.importAddDeviceModal.hide();
     }
     openInstallAndUninstallModal(){
         this.loadPackageNameList();
