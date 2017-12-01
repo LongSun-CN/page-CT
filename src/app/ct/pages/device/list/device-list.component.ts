@@ -287,4 +287,24 @@ export class DeviceListComponent {
 
         this.onSearch(this.table.currentPage);
     }
+
+    //编辑设备信息
+    updateDeviceDetail() {
+        this.httpService
+            .post(environment.getUrl('device/' + this.deviceDetail.id), {
+                _method: 'put',
+                num: this.deviceDetail.num,
+                description: this.deviceDetail.description
+            })
+            .map((response) => response.json())
+            .subscribe((result) => {
+                console.log(result);
+                if (result.status == '1') {
+                    this.deviceDetail = result.properties.device;
+                } else {
+                    this.toastService.pop('error', '修改设备信息失败，错误码：' + result.errorCode);
+                }
+            });
+        this.onSearch(this.table.currentPage);
+    }
 }
