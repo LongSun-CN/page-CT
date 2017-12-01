@@ -66,6 +66,15 @@ export class DeviceListComponent {
     @ViewChild('importModal')
     importModal: ModalDirective;
 
+    @ViewChild('importAddDeviceModal')
+    importAddDeviceModal: ModalDirective;
+
+    @ViewChild('importInstallAndUninstallModal')
+    importInstallAndUninstallModal:ModalDirective;
+
+    addDevices: any[] = [];
+    packageNameList:any[] = [];
+
     constructor(private tableConfig: TableConfig,
                 private httpService: HttpService,
                 private toastService: ToastService,
@@ -104,6 +113,15 @@ export class DeviceListComponent {
                     disabled: () => this.table.getSelectedRows().length != 1,
                     onclick: () => {
                         this.navigateToDevieOperate();
+                    }
+                },
+                {
+                    text: '安装APP/卸载APP',
+                    iconCls: 'fa fa-cog',
+                    show: true,
+                    disabled: () => this.table.getSelectedRows().length != 1,
+                    onclick: () => {
+                        this.openInstallAndUninstallModal();
                     }
                 },
             ]
@@ -307,4 +325,73 @@ export class DeviceListComponent {
             });
         this.onSearch(this.table.currentPage);
     }
+
+    openAddDeviceModal() {
+        this.addDevices = [{}];
+        this.importAddDeviceModal.show();
+    }
+    addDeviceComponent(){
+        if(this.addDevices.length<20){
+            this.addDevices.push({});
+        }else {
+            this.toastService.pop("error", '警告','单次最多添加20个设备');
+        }
+    }
+    addDeviceAction(){
+        for(var i=0;i<this.addDevices.length;i++){
+            var addDevice_serialNum = this.addDevices[i].addDevice_serialNum;
+            var addDevice_num = this.addDevices[i].addDevice_num;
+            var addDevice_desc = this.addDevices[i].addDevice_desc;
+            if(addDevice_serialNum==null || addDevice_serialNum==''|| addDevice_num==null || addDevice_num==''||addDevice_desc==null || addDevice_desc==''){
+                this.toastService.pop("error", '警告','设备信息填写不完整，请填写后重新添加');
+            }else{
+                console.log('设备信息：'+addDevice_serialNum+','+addDevice_num+','+addDevice_desc);
+                this.httpService.post(environment.getUrl('device/add'), {
+                    num: addDevice_num,
+                    identifier: addDevice_serialNum,
+                    description: addDevice_desc
+                })
+                .map((response) => response.json())
+                .subscribe((result) => {
+                    console.log(result);
+                    if (result.status == '1') {
+                        this.toastService.pop("success", '成功',addDevice_num+'设备添加成功');
+                    } else {
+                        this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
+                    }
+                });
+            }
+
+        }
+        this.importAddDeviceModal.hide();
+    }
+    openInstallAndUninstallModal(){
+        this.loadPackageNameList();
+        this.importInstallAndUninstallModal.show();
+    }
+    loadPackageNameList(){
+        this.packageNameList[0] = 'com.ourpalm.test1';
+        this.packageNameList[1] = 'com.ourpalm.test2';
+        this.packageNameList[2] = 'com.ourpalm.test3';
+        // this.httpService
+        //     .get(environment.getUrl('device/'))
+        //     .map((response) => response.json())
+        //     .subscribe((result) => {
+        //         console.log(result);
+        //         if (result.status == '1') {
+        //             this.packageNameList = [];
+        //         } else {
+        //             this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
+        //         }
+        //     });
+    }
+    installPackageAction(){
+        console.log('安装Package');
+    }
+
+    uninstallPackageAction(){
+        console.log('卸载Package');
+    }
+
+
 }
