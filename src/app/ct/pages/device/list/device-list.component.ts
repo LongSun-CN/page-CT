@@ -73,7 +73,7 @@ export class DeviceListComponent {
     importInstallAndUninstallModal:ModalDirective;
 
     addDevices: any[] = [];
-    packageNameList:any[] = [];
+    installAndUninstallDevices:any[] = [];
 
     constructor(private tableConfig: TableConfig,
                 private httpService: HttpService,
@@ -366,24 +366,41 @@ export class DeviceListComponent {
         }
     }
     openInstallAndUninstallModal(){
-        this.loadPackageNameList();
+        this.installAndUninstallDevices =[];
+        var length = this.table.getCheckedRows().length;
+        for(var i=0;i<length;i++){
+            console.log('id='+this.table.getCheckedRows()[i].id+',identifier='+this.table.getCheckedRows()[i].identifier);
+            this.installAndUninstallDevices[i] = this.table.getCheckedRows()[i];
+        }
+        if(length==0){
+            this.installAndUninstallDevices[0] = this.table.getSelectedRows()[0];
+        }
+        console.log("length3="+this.installAndUninstallDevices.length);
+        if(length>0)
         this.importInstallAndUninstallModal.show();
     }
-    loadPackageNameList(){
-        this.packageNameList[0] = 'com.ourpalm.test1';
-        this.packageNameList[1] = 'com.ourpalm.test2';
-        this.packageNameList[2] = 'com.ourpalm.test3';
-        // this.httpService
-        //     .get(environment.getUrl('device/'))
-        //     .map((response) => response.json())
-        //     .subscribe((result) => {
-        //         console.log(result);
-        //         if (result.status == '1') {
-        //             this.packageNameList = [];
-        //         } else {
-        //             this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
-        //         }
-        //     });
+
+    checkInstallPackage(){
+        console.log('选择安装包');
+        var path = document.getElementById('checkInstallPackageFile');
+        console.log('选择安装包名:'+path);
+    }
+
+    removeOperatorDevice(identifier:string){
+        console.log("删除:"+identifier);
+        var arrLength = this.installAndUninstallDevices.length;
+        var idx = -1;
+        for(var i=0;i<arrLength;i++){
+            if(identifier==this.installAndUninstallDevices[i].identifier){
+                idx=i;
+                break;
+            }
+        }
+        if(idx>=0){
+            this.installAndUninstallDevices = this.installAndUninstallDevices.slice(0,idx).concat(this.installAndUninstallDevices.slice(idx+1,arrLength));
+        }
+        console.log("删除后剩余:"+this.installAndUninstallDevices.length);
+
     }
     installPackageAction(){
         console.log('安装Package');

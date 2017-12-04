@@ -527,44 +527,37 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="installApp">
-                        <div class="box-pane">
-                            <label>选择安装包:</label>
-                            <select>
-                                <option *ngFor="let packageName of packageNameList" >
-                                        {{packageName}}
-                                </option>
-                            </select>
+                        <div class="box-body">
+                            <label>安装包:</label> <input id="apkFilePath" type="file" />
                         </div>
-                        <div class="box-pane">
-                            <ol>
-                                <li > <label border="1" >测试机型1</label><button type="button" class="btn btn-box-tool"><i
-                                    class="fa fa-times"></i></button></li>
-                                <li > <label >测试机型2</label><button type="button" class="btn btn-box-tool"><i
-                                    class="fa fa-times"></i></button> </li>
+                        <div class="box-body">
+                            <ol >
+                                <li *ngFor="let installAndUninstallDevice of installAndUninstallDevices">
+                                    <label border="1" >机型:</label> <label border="1" >{{installAndUninstallDevice.model}}</label>
+                                    <label>,</label><label border="1" >设备ID:</label> <label border="1" >{{installAndUninstallDevice.identifier}}</label>
+                                    <button type="button" class="btn btn-box-tool" (click)="removeOperatorDevice(installAndUninstallDevice.identifier);">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </li>
                             </ol>
                         </div>
                         <div class="install-modal-footer-btn">
-                            <button class="btn btn-primary" type="button" (click)="installPackageAction()">添加</button>
+                            <button class="btn btn-primary" type="button" (click)="installPackageAction()">安装</button>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="uninstallApp">
-                        <div>
-                            <label>选择卸载包:</label>
-                            <select>
-                                <option *ngFor="let packageName of packageNameList" >
-                                    {{packageName}}
-                                </option>
-                            </select>
+                        <div class="box-body">
+                            <label>输入包名:</label><input placeholder="输入要卸载的包名" />
                         </div>
-                        <div class="box-pane">
-                            <ol>
+                        <div class="box-body">
+                            <ol >
                                 <li > <label >测试机型1</label><button type="button" class="btn btn-box-tool"><i
                                     class="fa fa-times"></i></button> </li>
                                 <li > <label >测试机型2</label><button type="button" class="btn btn-box-tool"><i
                                     class="fa fa-times"></i></button> </li>
                             </ol>
                         </div>
-                        <div class="add-modal-footer-btn">
+                        <div class="uninstall-modal-footer-btn">
                             <button class="btn btn-primary" type="button" (click)="uninstallPackageAction()">卸载</button>
                         </div>
                     </div>
