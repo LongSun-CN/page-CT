@@ -110,6 +110,16 @@
                                               (ngModelChange)="saveQueryCondition()"
                             >
                             </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'在线状态'"
+                                              [(ngModel)]="criteria.isOnline"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="isOnlineSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
                             <gw-input #gwcontrol #input
                                       [label]="'MAC地址'"
                                       [(ngModel)]="criteria.mac"
@@ -223,7 +233,12 @@
                             </ourpalm-table-column>&ndash;&gt;
                             <ourpalm-table-column [column]="{header: '设备状态', field: 'status'}">
                                 <ng-template let-row="$row">
-                                    {{row.status == 0? '离线':'在线'}}
+                                    {{row.status == 0? '空闲中':'使用中'}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '在线状态', field: 'status'}">
+                                <ng-template let-row="$row">
+                                    {{row.isOnline == 0? '离线':'在线'}}
                                 </ng-template>
                             </ourpalm-table-column>
                             &lt;!&ndash;<ourpalm-table-column [column]="{header: '创建时间', field: 'createtime'}">
