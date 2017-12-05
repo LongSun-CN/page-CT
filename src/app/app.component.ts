@@ -179,7 +179,12 @@ export class AppComponent implements OnInit {
                         icon: 'fa fa-link',
                     }
                 ]
-            }
+            },
+            {
+                path: 'ct/script',
+                title: '脚本管理',
+                icon: 'fa fa-link',
+            },
         ]
     }
 }

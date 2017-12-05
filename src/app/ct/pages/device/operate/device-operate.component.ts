@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
 import {ActivatedRoute} from "@angular/router";
 
@@ -8,7 +8,7 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ['./device-operate.component.scss']
 })
 
-export class DeviceOperateComponent/* implements OnInit*/{
+export class DeviceOperateComponent implements AfterViewInit{
 
     name: string; // 设备名称
     deviceId: string; // 设备id
@@ -46,8 +46,8 @@ export class DeviceOperateComponent/* implements OnInit*/{
         });
     }
 
-   /* //初始化
-    ngOnInit(): void {
+    //初始化
+    ngAfterViewInit(): void {
 
         this.canvas = this.canvasElement.nativeElement;
         this.brush = this.canvas.getContext('2d');
@@ -123,7 +123,7 @@ export class DeviceOperateComponent/* implements OnInit*/{
                 image.src = u;
             }
         }
-    }*/
+    }
 
     // 初始化canvas尺寸
     initCanvasSize(width, height) {
@@ -147,6 +147,7 @@ export class DeviceOperateComponent/* implements OnInit*/{
             }
         }
     }
+
 
     canvasClick(e) {
         //标准的获取鼠标点击相对于canvas画布的坐标公式
@@ -189,7 +190,7 @@ export class DeviceOperateComponent/* implements OnInit*/{
     };
 
     // 鼠标松开
-    divMouseup(e) {
+    divMouseup(e: Event) {
         console.log("鼠标松开");
         this.isDivMouseDown = false;
         // this.sendMouseup();

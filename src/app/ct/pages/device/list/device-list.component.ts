@@ -95,9 +95,6 @@ export class DeviceListComponent {
 
         this.uploader = new FileUploader({
             url:environment.getUrl('install'),
-            additionalParameter: {
-                deviceIds:this.installAndUninstallDevices
-            },
             queueLimit:1,
             autoUpload:false,
             removeAfterUpload:true,
@@ -114,6 +111,7 @@ export class DeviceListComponent {
     }
 
     ngOnInit(): void {
+
         //初始化表格
         this.table = this.tableConfig.create({
             cacheKey: 'devices_cache',
@@ -358,8 +356,9 @@ export class DeviceListComponent {
                 console.log(result);
                 if (result.status == '1') {
                     this.deviceDetail = result.properties.device;
+                    this.toastService.pop('success', '成功', '修改设备信息成功');
                 } else {
-                    this.toastService.pop('error', '修改设备信息失败，错误码：' + result.errorCode);
+                    this.toastService.pop('error', '失败','修改设备信息失败，错误码：' + result.errorCode);
                 }
             });
         this.onSearch(this.table.currentPage);
@@ -457,6 +456,14 @@ export class DeviceListComponent {
 
     installPackageAction(){
         console.log('安装应用');
+        let deviceIds = [];
+        this.installAndUninstallDevices.forEach(function (device) {
+            deviceIds.push(device.identifier);
+        })
+        this.uploader.options.additionalParameter = {
+            deviceIds:JSON.stringify(deviceIds)
+        }
+
         this.uploader.uploadAll();
         this.importInstallAndUninstallModal.hide();
         this.toastService.pop("success","正在上传安装应用。。。")

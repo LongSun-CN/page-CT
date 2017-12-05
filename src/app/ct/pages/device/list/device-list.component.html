@@ -478,9 +478,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-block btn-primary"
-                        (click)="importModal.hide();updateDeviceDetail()">确定
-                </button>
+                <div class="add-modal-footer-btn">
+                    <button class="btn btn-primary" type="button" (click)="importModal.hide();updateDeviceDetail()">保存修改
+                    </button>
+                    <button class="btn btn-primary" type="button"
+                            (click)="importModal.hide()">取消
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -608,9 +612,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

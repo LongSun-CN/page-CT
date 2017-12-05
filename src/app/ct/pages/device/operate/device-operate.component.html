@@ -20,7 +20,7 @@
                                     <div class="title">{{name}}</div>
                                     <div id="videodiv">
                                         <!--<img src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png" id="remoteloading">-->
-                                        <canvas id="canvasElement" #canvasElement style="border: 1px solid red;margin:0 auto" onclick="canvasClick();" onmousedown="divMousedown(event)" onmouseup="divMouseup(event)" onmousemove="divMousemove(event)"></canvas>
+                                        <canvas id="canvasElement" #canvasElement style="border: 1px solid red;margin:0 auto" (click)="canvasClick(event)" (mousedown)="divMousedown(event)" (mouseup)="divMouseup(event)" (mousemove)="divMousemove(event)"></canvas>
                                     </div>
                                     <div class="videobarbox">
                                         <li class="btn1 on"><em></em><i>翻转</i></li>
