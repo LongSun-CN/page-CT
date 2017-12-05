@@ -1,0 +1,278 @@
+<section class="content-header">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border">
+                    <ol class="breadcrumb">
+                        <li><a [routerLink]="['./']"><i class="fa fa-home"></i>首页</a></li>
+                        <li><a><i class="fa fa-link"></i>脚本列表</a></li>
+                    </ol>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display:block;">
+                    <div class="toolbar">
+                        <gw-toolbar #bar>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备编号'"
+                                      [(ngModel)]="criteria.num"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="true"
+                                      [selectData]="rangeSelectData"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'唯一标识'"
+                                      [(ngModel)]="criteria.identifier"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备id'"
+                                      [(ngModel)]="criteria.id"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备名称'"
+                                      [(ngModel)]="criteria.name"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'设备型号'"
+                                      [(ngModel)]="criteria.brand"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'厂商'"
+                                      [(ngModel)]="criteria.manufacturer"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-input #gwcontrol #input
+                                      [label]="'api版本'"
+                                      [(ngModel)]="criteria.apilevel"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="true"
+                                      [selectData]="rangeSelectData"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'系统类型'"
+                                              [(ngModel)]="criteria.systemtype"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="systemTypeSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'分辨率'"
+                                              [(ngModel)]="criteria.resolution"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="resolutionSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'设备状态'"
+                                              [(ngModel)]="criteria.status"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="statusSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-single-select #gwcontrol #input
+                                              [label]="'在线状态'"
+                                              [(ngModel)]="criteria.isOnline"
+                                              [closeable]="true"
+                                              [enabled]="true"
+                                              [showSelect]="false"
+                                              [data]="isOnlineSelectData"
+                                              (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-single-select>
+                            <gw-input #gwcontrol #input
+                                      [label]="'MAC地址'"
+                                      [(ngModel)]="criteria.mac"
+                                      [closeable]="true"
+                                      [enabled]="true"
+                                      [showSelect]="false"
+                                      (ngModelChange)="saveQueryCondition()"
+                            >
+                            </gw-input>
+                        </gw-toolbar>
+                    </div>
+                    <div class="box-body-top-tool">
+                        <div class="row">
+                            <div class="col-sm-1" style="padding-right: 0px">
+                                <button (click)="openAddDeviceModal()" class="btn btn-block btn-primary btn-xs">添加设备
+                                </button>
+                            </div>
+                            <div class="col-sm-1" style="padding-right: 0px">
+                                <button (click)="openDeleteDeviceModal()" class="btn btn-block btn-primary btn-xs">
+                                    删除设备
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <ourpalm-table [table]="table">
+                            <ourpalm-table-column
+                                [column]="{header: '选择列', field: 'checkbox', checkbox: true}"></ourpalm-table-column>
+                            <ourpalm-table-column
+                                [column]="{header: '序号', field: 'rownumbers', rownumbers: true, show: false}"></ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备编号', field: 'num'}">
+                                <ng-template let-row="$row">
+                                    {{row.num}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '唯一标识', field: 'identifier'}">
+                                <ng-template let-row="$row">
+                                    {{row.identifier}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: '设备id', field: 'id'}">
+                                <ng-template let-row="$row">
+                                    {{row.id}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备名称', field: 'name'}">
+                                <ng-template let-row="$row">
+                                    {{row.name}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备型号', field: 'model'}">
+                                <ng-template let-row="$row">
+                                    {{row.model}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '设备品牌', field: 'brand'}">
+                                <ng-template let-row="$row">
+                                    {{row.brand}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: '厂商', field: 'manufacturer'}">
+                            <ng-template let-row="$row">
+                                {{row.manufacturer}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '内核版本', field: 'kernelversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.kernelversion}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '构建版本', field: 'buildversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.buildversion}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: 'api版本', field: 'apilevel'}">
+                                <ng-template let-row="$row">
+                                    {{row.apilevel}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '系统版本', field: 'systemversion'}">
+                                <ng-template let-row="$row">
+                                    {{row.systemversion}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '系统类型', field: 'systemtype'}">
+                                <ng-template let-row="$row">
+                                    {{row.systemtype == 0 ? "安卓":"IOS"}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '分辨率', field: 'resolution'}">
+                                <ng-template let-row="$row">
+                                    {{row.resolution}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '屏幕尺寸', field: 'screensize'}">
+                                <ng-template let-row="$row">
+                                    {{row.screensize}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: 'cpu频率', field: 'cpurate'}">
+                            <ng-template let-row="$row">
+                                {{row.cpurate}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'cpu类型', field: 'cputype'}">
+                                <ng-template let-row="$row">
+                                    {{row.cputype}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'MAC地址', field: 'mac'}">
+                                <ng-template let-row="$row">
+                                    {{row.mac}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: 'IDFA地址', field: 'idfa'}">
+                                <ng-template let-row="$row">
+                                    {{row.idfa}}
+                                </ng-template>
+                            </ourpalm-table-column>&ndash;&gt;
+                            <ourpalm-table-column [column]="{header: '设备状态', field: 'status'}">
+                                <ng-template let-row="$row">
+                                    {{row.status == 0? '空闲中':'使用中'}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '在线状态', field: 'status'}">
+                                <ng-template let-row="$row">
+                                    {{row.isOnline == 0? '离线':'在线'}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            &lt;!&ndash;<ourpalm-table-column [column]="{header: '创建时间', field: 'createtime'}">
+                            <ng-template let-row="$row">
+                                {{row.createtime}}
+                            </ng-template>
+                        </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '更新时间', field: 'updatetime'}">
+                                <ng-template let-row="$row">
+                                    {{row.updatetime}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                            <ourpalm-table-column [column]="{header: '描述', field: 'description'}">
+                                <ng-template let-row="$row">
+                                    {{row.description}}
+                                </ng-template>
+                            </ourpalm-table-column>
+                        </ourpalm-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
