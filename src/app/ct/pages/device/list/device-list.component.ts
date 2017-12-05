@@ -383,6 +383,7 @@ export class DeviceListComponent {
             var addDevice_desc = this.addDevices[i].addDevice_desc;
             if(addDevice_serialNum==null || addDevice_serialNum==''|| addDevice_num==null || addDevice_num==''||addDevice_desc==null || addDevice_desc==''){
                 this.toastService.pop("error", '警告','设备信息填写不完整，请填写后重新添加');
+                return;
             }else{
                 console.log('设备信息：'+addDevice_serialNum+','+addDevice_num+','+addDevice_desc);
                 this.httpService.post(environment.getUrl('device/add'), {
@@ -395,6 +396,7 @@ export class DeviceListComponent {
                     console.log(result);
                     if (result.status == '1') {
                         this.toastService.pop("success", '成功',addDevice_num+'设备添加成功');
+                        this.importAddDeviceModal.hide();
                     } else {
                         this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
                     }
@@ -404,12 +406,9 @@ export class DeviceListComponent {
             }
 
         }
-        if(this.addDevices.length==i){
-            this.importAddDeviceModal.hide();
-        }
     }
     openInstallAndUninstallModal(){
-
+        this.installAndUninstallDevices = [];//每次打开需要初始化，否则，会加上上次选中的设备
         let installAndUninstallDevices = this.installAndUninstallDevices;
         this.table.getCheckedRows().forEach(function (device) {
             if(device.isOnline == 1){
@@ -425,12 +424,6 @@ export class DeviceListComponent {
         }
 
         this.importInstallAndUninstallModal.show();
-    }
-
-    checkInstallPackage(){
-        console.log('选择安装包');
-        var path = document.getElementById('checkInstallPackageFile');
-        console.log('选择安装包名:'+path);
     }
 
     removeOperatorDevice(identifier:string){
@@ -471,7 +464,31 @@ export class DeviceListComponent {
 
     uninstallPackageAction(){
         console.log('卸载应用');
-        this.importInstallAndUninstallModal.hide();
+        var  deviceIds = '';
+        var arrLength = this.installAndUninstallDevices.length;
+        this.installAndUninstallDevices.forEach(function (installAndUninstallDevice) {
+            deviceIds += installAndUninstallDevice.identifier +',';
+        });
+        deviceIds = deviceIds.slice(0,deviceIds.length-1);
+        var packageName = $('#uninstallPackageName').val();
+        if(packageName==''){
+            this.toastService.pop('error', '警告','需输入正确的安装包名');
+            return;
+        }
+        console.log("deviceIds="+deviceIds+';packageName='+packageName);
+        this.httpService.get(environment.getUrl('uninstall'),{
+            packageName:packageName,
+            deviceIdList:deviceIds
+        }).map((response)=>response.json())
+            .subscribe((result)=>{
+                console.log(result);
+                if(result.status=='1'){
+                    this.toastService.pop('success', '成功','安装包卸载成功');
+                    this.importInstallAndUninstallModal.hide();
+                }else{
+                    this.toastService.pop('error', '失败','安装包卸载失败，错误码：' + result.errorCode);
+                }
+            });
     }
 
     openDeleteDeviceModal(){

@@ -136,4 +136,39 @@
 .box-body-top-tool button{
     background-color: #337ab7;
 }
-
+.param_add_device_table tbody td {
+    margin: 5px;
+    vertical-align: middle;
+}
+.param_add_device_table tbody td div{
+    vertical-align: middle;
+    margin: 5px;
+}
+.param_add_device_table tbody td input{
+    vertical-align: middle;
+    margin: 5px;
+    width: 40%;
+}
+.param_add_device_table tbody td .addDeviceDesc input{
+    vertical-align: middle;
+    margin: 5px;
+    width: 70%;
+}
+.param_add_device_table tbody td label{
+    margin: 5px;
+    width: 20%;
+    vertical-align: middle;
+    text-align: right;
+}
+.param_add_device_table tbody th{
+    margin: 5px;
+    width: 10%;
+    vertical-align: middle;
+    text-align: center;
+}
+.param_add_device_table tbody tr{
+    border: 1px solid #00ca6d;
+}
+.addDeviceComponent{
+    margin-top: 5px;
+}

@@ -503,28 +503,31 @@
                 <div class="param_table">
                         <div class="param_content_add">
                             <table class="param_add_device_table">
-                                <tr>
-                                    <th>设备唯一标识</th>
-                                    <th>设备编号</th>
-                                    <th>描述</th>
-                                </tr>
+                                <!--<tr>-->
+                                    <!--<th>设备唯一标识</th>-->
+                                    <!--<th>设备编号</th>-->
+                                    <!--<th>描述</th>-->
+                                <!--</tr>-->
                                 <tbody>
                                     <tr *ngFor="let addDevice of addDevices">
+                                        <th>{{addDevices.indexOf(addDevice,0)+1}}</th>
                                         <td>
-                                            <input [(ngModel)]="addDevice.addDevice_serialNum" name="addDevice_serialNum" placeholder="录入设备序列号" required  />
-                                        </td>
-                                        <td>
-                                            <input [(ngModel)]="addDevice.addDevice_num"  name="addDevice_num"  placeholder="录入设备编号" required/>
-                                        </td>
-                                        <td>
-                                            <textarea [(ngModel)]="addDevice.addDevice_desc"   name="addDevice_desc" rows="2" placeholder="描述信息" required ></textarea>
+                                            <div>
+                                                <label>设备ID：</label><input [(ngModel)]="addDevice.addDevice_serialNum" name="addDevice_serialNum" placeholder="录入设备唯一标识" required  />
+                                            </div>
+                                            <div>
+                                                <label>设备编号：</label><input [(ngModel)]="addDevice.addDevice_num"  name="addDevice_num"  placeholder="录入设备编号" required/>
+                                            </div>
+                                            <div class="addDeviceDesc">
+                                                <label>描述：</label><input [(ngModel)]="addDevice.addDevice_desc"   name="addDevice_desc" placeholder="描述信息" required />
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                 </div>
-                <div>
+                <div class="addDeviceComponent">
                     <button class="btn btn-primary confirm-btn" (click)="addDeviceComponent()">追加设备</button>
                 </div>
             </div>
@@ -588,7 +591,7 @@
                     </div>
                     <div class="tab-pane fade" id="uninstallApp">
                         <div class="box-body">
-                            <label>输入包名:</label><input placeholder="输入要卸载的包名" />
+                            <label>输入包名:</label><input id="uninstallPackageName" placeholder="输入要卸载的包名" />
                         </div>
                         <div class="box-body">
                             <ol >
