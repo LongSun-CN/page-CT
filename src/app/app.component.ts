@@ -171,7 +171,7 @@ export class AppComponent implements OnInit {
         this.mylinks = [
             {
                 title: '设备管理',
-                icon: 'fa fa-link',
+                icon: 'fa fa-tablet',
                 children: [
                     {
                         path: 'ct/device/list',
@@ -183,7 +183,17 @@ export class AppComponent implements OnInit {
             {
                 path: 'ct/script',
                 title: '脚本管理',
-                icon: 'fa fa-link',
+                icon: 'fa fa-file-code-o',
+            },
+            {
+                path: 'ct/task',
+                title: '任务管理',
+                icon: 'fa fa-tasks',
+            },
+            {
+                path: 'ct/report',
+                title: '报告管理',
+                icon: 'fa fa-bar-chart',
             },
         ]
     }
