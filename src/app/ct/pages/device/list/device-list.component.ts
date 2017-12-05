@@ -391,6 +391,7 @@ export class DeviceListComponent {
         }
         if(length==0){
             this.installAndUninstallDevices[0] = this.table.getSelectedRows()[0];
+            length=1;
         }
         console.log("length3="+this.installAndUninstallDevices.length);
         if(length>0)
