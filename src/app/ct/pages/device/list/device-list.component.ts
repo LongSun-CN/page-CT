@@ -6,6 +6,7 @@ import {HttpService} from "../../../../shared/services/httpx.service";
 import {ToastService} from "../../../../shared/services/toast.service";
 import {ModalDirective} from "ngx-bootstrap";
 import {Router, ActivatedRoute} from "@angular/router";
+import {FileUploader} from "ng2-file-upload";
 
 @Component({
     selector: 'device-list',
@@ -77,6 +78,12 @@ export class DeviceListComponent {
     @ViewChild('importInstallAndUninstallModal')
     importInstallAndUninstallModal:ModalDirective;
 
+    @ViewChild('deleteModal')
+    deleteModal:ModalDirective;
+
+    // 文件上传的地址
+    public uploader:FileUploader;
+
     addDevices: any[] = [];
     installAndUninstallDevices:any[] = [];
 
@@ -86,6 +93,27 @@ export class DeviceListComponent {
                 private route: ActivatedRoute,
                 private router: Router,) {
 
+        this.uploader = new FileUploader({
+            url:environment.getUrl('install'),
+            additionalParameter: {
+                deviceIds:this.installAndUninstallDevices
+            },
+            queueLimit:1,
+            autoUpload:false,
+            removeAfterUpload:true,
+        });
+        // 对上传失败的处理
+        this.uploader.onSuccessItem = function(fileItem,response){
+            let responseData = JSON.parse(response);
+            if(responseData.status == 1){
+                toastService.pop("success","成功","应用包安装成功")
+            }else{
+                toastService.pop("error","失败","应用包安装失败，错误码"+ responseData.status)
+            }
+        }
+    }
+
+    ngOnInit(): void {
         //初始化表格
         this.table = this.tableConfig.create({
             cacheKey: 'devices_cache',
@@ -113,7 +141,7 @@ export class DeviceListComponent {
                 },
                 {
                     text: '云真机',
-                    iconCls: 'fa fa-mixcloud',
+                    iconCls: 'fa fa-cloud',
                     show: true,
                     disabled: () => this.table.getSelectedRows().length != 1,
                     onclick: () => {
@@ -124,14 +152,13 @@ export class DeviceListComponent {
                     text: '安装APP/卸载APP',
                     iconCls: 'fa fa-cog',
                     show: true,
-                    disabled: () => this.table.getSelectedRows().length != 1,
+                    disabled: () => this.table.getCheckedRows().length == 0,
                     onclick: () => {
                         this.openInstallAndUninstallModal();
                     }
                 },
             ]
         });
-
     }
 
     //分页数据查询
@@ -383,17 +410,21 @@ export class DeviceListComponent {
         }
     }
     openInstallAndUninstallModal(){
-        this.installAndUninstallDevices =[];
-        var length = this.table.getCheckedRows().length;
-        for(var i=0;i<length;i++){
-            console.log('id='+this.table.getCheckedRows()[i].id+',identifier='+this.table.getCheckedRows()[i].identifier);
-            this.installAndUninstallDevices[i] = this.table.getCheckedRows()[i];
+
+        let installAndUninstallDevices = this.installAndUninstallDevices;
+        this.table.getCheckedRows().forEach(function (device) {
+            if(device.isOnline == 1){
+                installAndUninstallDevices.push(device);
+            }
+        })
+
+        installAndUninstallDevices.push(this.table.getCheckedRows()[0]);
+
+        if(this.installAndUninstallDevices.length == 0){
+            this.toastService.pop("error","警告","当前已勾选的无在线设备，请至少勾选一部在线设备");
+            return;
         }
-        if(length==0){
-            this.installAndUninstallDevices[0] = this.table.getSelectedRows()[0];
-        }
-        console.log("length3="+this.installAndUninstallDevices.length);
-        if(length>0)
+
         this.importInstallAndUninstallModal.show();
     }
 
@@ -406,6 +437,10 @@ export class DeviceListComponent {
     removeOperatorDevice(identifier:string){
         console.log("删除:"+identifier);
         var arrLength = this.installAndUninstallDevices.length;
+        if(arrLength == 1){
+            this.toastService.pop("error","警告","至少保留一个设备");
+            return;
+        }
         var idx = -1;
         for(var i=0;i<arrLength;i++){
             if(identifier==this.installAndUninstallDevices[i].identifier){
@@ -419,16 +454,51 @@ export class DeviceListComponent {
         console.log("删除后剩余:"+this.installAndUninstallDevices.length);
 
     }
+
     installPackageAction(){
-        console.log('安装Package');
+        console.log('安装应用');
+        this.uploader.uploadAll();
+        this.importInstallAndUninstallModal.hide();
+        this.toastService.pop("success","正在上传安装应用。。。")
     }
 
     uninstallPackageAction(){
-        console.log('卸载Package');
-        var arrLength = this.installAndUninstallDevices.length;
-        for(var i=0;i<arrLength;i++){
+        console.log('卸载应用');
+        this.importInstallAndUninstallModal.hide();
+    }
 
+    openDeleteDeviceModal(){
+        if(this.table.getCheckedRows().length == 0){
+            this.toastService.pop('error','警告','请先勾选需要删除的设备')
+        } else {
+            this.deleteModal.show();
         }
+    }
+
+    deleteDevice(){
+        var idList = [];
+        this.table.getCheckedRows().forEach(function (row) {
+            idList.push(row.id);
+        })
+
+        this.httpService
+            .post(environment.getUrl('device'), {
+                _method: 'delete',
+                idList: idList
+            })
+            .map((response) => response.json())
+            .subscribe((result) => {
+                console.log(result);
+                if (result.status == '1') {
+                    this.deviceDetail = result.properties.device;
+                    this.toastService.pop('success', '成功','设备删除成功');
+                } else {
+                    this.toastService.pop('error', '失败','设备删除失败，错误码：' + result.errorCode);
+                }
+            });
+        this.deleteModal.hide();
+        this.onSearch(this.table.currentPage);
+
     }
 
 

@@ -131,8 +131,18 @@
                             </gw-input>
                         </gw-toolbar>
                     </div>
-                    <div class="box-body-top-tool" >
-                        <button (click)="openAddDeviceModal()">添加设备</button>
+                    <div class="box-body-top-tool">
+                        <div class="row">
+                            <div class="col-sm-1" style="padding-right: 0px">
+                                <button (click)="openAddDeviceModal()" class="btn btn-block btn-primary btn-xs">添加设备
+                                </button>
+                            </div>
+                            <div class="col-sm-1" style="padding-right: 0px">
+                                <button (click)="openDeleteDeviceModal()" class="btn btn-block btn-primary btn-xs">
+                                    删除设备
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
@@ -542,8 +552,14 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="installApp">
-                        <div class="box-body">
-                            <label>安装包:</label> <input id="apkFilePath" type="file" />
+                        <div class="row">
+                            <div class="col-sm-3" style="margin: 20px">
+                                <label class="btn btn-primary btn-md image-change-btn">
+                                    选择本地安装包
+                                    <input type="file" ng2FileSelect [uploader]="uploader"
+                                           accept="application/vnd.android.package-archive" style="display: none">
+                                </label>
+                            </div>
                         </div>
                         <div class="box-body">
                             <ol >
@@ -556,8 +572,14 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="install-modal-footer-btn">
-                            <button class="btn btn-primary" type="button" (click)="installPackageAction()">安装</button>
+                        <div class="modal-footer">
+                            <div class="add-modal-footer-btn">
+                                <button class="btn btn-primary" type="button" (click)="installPackageAction()">安装
+                                </button>
+                                <button class="btn btn-primary" type="button"
+                                        (click)="importInstallAndUninstallModal.hide()">取消
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="uninstallApp">
@@ -575,14 +597,42 @@
                                 </li>
                             </ol>
                         </div>
-                        <div class="uninstall-modal-footer-btn">
-                            <button class="btn btn-primary" type="button" (click)="uninstallPackageAction()">卸载</button>
+                        <div class="modal-footer">
+                            <div class="add-modal-footer-btn">
+                                <button class="btn btn-primary" type="button" (click)="uninstallPackageAction()">卸载
+                                </button>
+                                <button class="btn btn-primary" type="button"
+                                        (click)="importInstallAndUninstallModal.hide()">取消
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
 
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #deleteModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content modal-center modal-center-sm">
+            <div class="modal-header">
+                <button class="close" type="button" aria-label="Close" (click)="deleteModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">删除设备</h4>
+            </div>
+            <div class="modal-body">
+                <span>确定删除选中的{{table.getCheckedRows().length}}个设备?</span>
+            </div>
+            <div class="modal-footer">
+                <div class="add-modal-footer-btn">
+                    <button class="btn btn-primary" type="button" (click)="deleteDevice()">确定</button>
+                    <button class="btn btn-primary" type="button" (click)="deleteModal.hide()">取消</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

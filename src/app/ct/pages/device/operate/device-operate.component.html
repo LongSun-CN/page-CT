@@ -18,9 +18,10 @@
                             <div class="side-l"><a href="#" title="返回" class="back"><em></em><i>返回</i></a>
                                 <div class="phonevideo">
                                     <div class="title">{{name}}</div>
-                                    <div id="videodiv"><img
-                                        src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png"
-                                        id="remoteloading"></div>
+                                    <div id="videodiv">
+                                        <!--<img src="http://cdn.wetest.qq.com/cloud/1.2.8/static/images/source/remoteloading.png" id="remoteloading">-->
+                                        <canvas id="canvasElement" #canvasElement style="border: 1px solid red;margin:0 auto" onclick="canvasClick();" onmousedown="divMousedown(event)" onmouseup="divMouseup(event)" onmousemove="divMousemove(event)"></canvas>
+                                    </div>
                                     <div class="videobarbox">
                                         <li class="btn1 on"><em></em><i>翻转</i></li>
                                         <li class="btn2"><em></em><i>截图</i></li>

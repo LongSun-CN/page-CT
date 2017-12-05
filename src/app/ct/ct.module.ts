@@ -5,6 +5,7 @@ import {SharedModule} from "../shared/shared.module";
 import {routing} from "./ct-routing.module";
 import {RouterModule} from "@angular/router";
 import {NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
+import {FileUploadModule} from "ng2-file-upload";
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import {NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
         WidgetModule,
         SharedModule,
         NgbModalModule,
+        FileUploadModule,
         routing
     ],
     declarations: [
