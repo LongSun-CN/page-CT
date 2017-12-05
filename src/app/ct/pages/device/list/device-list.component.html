@@ -566,10 +566,13 @@
                         </div>
                         <div class="box-body">
                             <ol >
-                                <li > <label >测试机型1</label><button type="button" class="btn btn-box-tool"><i
-                                    class="fa fa-times"></i></button> </li>
-                                <li > <label >测试机型2</label><button type="button" class="btn btn-box-tool"><i
-                                    class="fa fa-times"></i></button> </li>
+                                <li *ngFor="let installAndUninstallDevice of installAndUninstallDevices">
+                                    <label border="1" >机型:</label> <label border="1" >{{installAndUninstallDevice.model}}</label>
+                                    <label>,</label><label border="1" >设备ID:</label> <label border="1" >{{installAndUninstallDevice.identifier}}</label>
+                                    <button type="button" class="btn btn-box-tool" (click)="removeOperatorDevice(installAndUninstallDevice.identifier);">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </li>
                             </ol>
                         </div>
                         <div class="uninstall-modal-footer-btn">

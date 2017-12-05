@@ -350,7 +350,8 @@ export class DeviceListComponent {
         }
     }
     addDeviceAction(){
-        for(var i=0;i<this.addDevices.length;i++){
+        var i=0;
+        for(;i<this.addDevices.length;i++){
             var addDevice_serialNum = this.addDevices[i].addDevice_serialNum;
             var addDevice_num = this.addDevices[i].addDevice_num;
             var addDevice_desc = this.addDevices[i].addDevice_desc;
@@ -368,7 +369,6 @@ export class DeviceListComponent {
                     console.log(result);
                     if (result.status == '1') {
                         this.toastService.pop("success", '成功',addDevice_num+'设备添加成功');
-                        this.importAddDeviceModal.hide();
                     } else {
                         this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
                     }
@@ -377,6 +377,9 @@ export class DeviceListComponent {
                 this.onSearch(this.table.currentPage);
             }
 
+        }
+        if(this.addDevices.length==i){
+            this.importAddDeviceModal.hide();
         }
     }
     openInstallAndUninstallModal(){
@@ -422,6 +425,10 @@ export class DeviceListComponent {
 
     uninstallPackageAction(){
         console.log('卸载Package');
+        var arrLength = this.installAndUninstallDevices.length;
+        for(var i=0;i<arrLength;i++){
+
+        }
     }
 
 
