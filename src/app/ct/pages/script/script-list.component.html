@@ -90,36 +90,6 @@
                                               (ngModelChange)="saveQueryCondition()"
                             >
                             </gw-single-select>
-                            <gw-single-select #gwcontrol #input
-                                              [label]="'分辨率'"
-                                              [(ngModel)]="criteria.resolution"
-                                              [closeable]="true"
-                                              [enabled]="true"
-                                              [showSelect]="false"
-                                              [data]="resolutionSelectData"
-                                              (ngModelChange)="saveQueryCondition()"
-                            >
-                            </gw-single-select>
-                            <gw-single-select #gwcontrol #input
-                                              [label]="'设备状态'"
-                                              [(ngModel)]="criteria.status"
-                                              [closeable]="true"
-                                              [enabled]="true"
-                                              [showSelect]="false"
-                                              [data]="statusSelectData"
-                                              (ngModelChange)="saveQueryCondition()"
-                            >
-                            </gw-single-select>
-                            <gw-single-select #gwcontrol #input
-                                              [label]="'在线状态'"
-                                              [(ngModel)]="criteria.isOnline"
-                                              [closeable]="true"
-                                              [enabled]="true"
-                                              [showSelect]="false"
-                                              [data]="isOnlineSelectData"
-                                              (ngModelChange)="saveQueryCondition()"
-                            >
-                            </gw-single-select>
                             <gw-input #gwcontrol #input
                                       [label]="'MAC地址'"
                                       [(ngModel)]="criteria.mac"
@@ -130,19 +100,6 @@
                             >
                             </gw-input>
                         </gw-toolbar>
-                    </div>
-                    <div class="box-body-top-tool">
-                        <div class="row">
-                            <div class="col-sm-1" style="padding-right: 0px">
-                                <button (click)="openAddDeviceModal()" class="btn btn-block btn-primary btn-xs">添加设备
-                                </button>
-                            </div>
-                            <div class="col-sm-1" style="padding-right: 0px">
-                                <button (click)="openDeleteDeviceModal()" class="btn btn-block btn-primary btn-xs">
-                                    删除设备
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="table-responsive">

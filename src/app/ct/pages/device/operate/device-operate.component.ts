@@ -1,14 +1,12 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {isUndefined} from "ngx-bootstrap/bs-moment/utils/type-checks";
-import {ActivatedRoute} from "@angular/router";
+import {AfterViewInit, Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'device-operate',
     templateUrl: './device-operate.component.html',
     styleUrls: ['./device-operate.component.scss']
 })
-
-export class DeviceOperateComponent implements AfterViewInit{
+export class DeviceOperateComponent implements AfterViewInit {
 
     name: string; // 设备名称
     deviceId: string; // 设备id
@@ -31,11 +29,8 @@ export class DeviceOperateComponent implements AfterViewInit{
     pointDate: Date;
     //------------------------
 
-    canvas: HTMLCanvasElement; // 画布
+    canvas: any; // 画布
     brush: CanvasRenderingContext2D;
-
-    @ViewChild('canvasElement')
-    canvasElement: ElementRef;
 
     ws: WebSocket;
 
@@ -49,7 +44,7 @@ export class DeviceOperateComponent implements AfterViewInit{
     //初始化
     ngAfterViewInit(): void {
 
-        this.canvas = this.canvasElement.nativeElement;
+        this.canvas = document.getElementById('canvasElement');
         this.brush = this.canvas.getContext('2d');
 
         let component = this;
@@ -60,25 +55,25 @@ export class DeviceOperateComponent implements AfterViewInit{
         // this.ws.binaryType = 'blob';
         this.ws.onclose = function () {
             console.log('onclose', arguments);
-        }
+        };
 
         this.ws.onerror = function () {
             console.log('onerror', arguments);
-        }
+        };
 
         this.ws.onopen = function () {
             console.log('连接成功, 发送初始化消息', arguments);
-            component.send("init", component.deviceId, "init");
-        }
+            component.sendMinitouchCommand('init', component.deviceId, 'init');
+        };
 
         // 接受minicap发送的手机截屏数据
         this.ws.onmessage = function(message) {
             let data = message.data;
 
-            if(typeof(data) == "string") {
-                if(data.indexOf("@@") == 0) {
+            if(typeof(data) == 'string') {
+                if(data.indexOf('@@') == 0) {
                     length = parseInt(data.substring(2, data.length));
-                    console.log("包头信息为 : " + data + ", 数据长度为: " + length);
+                    console.log('包头信息为 : ' + data + ', 数据长度为: ' + length);
                 }
             } else {
                 if(length > 0 && data instanceof ArrayBuffer) {
@@ -88,7 +83,7 @@ export class DeviceOperateComponent implements AfterViewInit{
             }
 
             if(component.count >= length) {
-                console.log("图像接收完成, imgArr的长度为: " + component.imgArr.length + ", 图像的字节数为: " + length);
+                console.log('图像接收完成, imgArr的长度为: ' + component.imgArr.length + ', 图像的字节数为: ' + length);
                 let img = new Uint8Array(length);
                 let sum = 0;
                 for(let i = 0; i < component.imgArr.length; i++) {
@@ -115,20 +110,84 @@ export class DeviceOperateComponent implements AfterViewInit{
                     image.onload = null;
                     image.src = component.BLANK_IMG;
                     image = null;
-                    u = null;
                     blob = null;
-                }
+                };
 
-                let u = URL.createObjectURL(blob);
-                image.src = u;
+                image.src = URL.createObjectURL(blob);
             }
-        }
+        };
+
+        this.initCanvasSize(1080, 1920);
+        this.canvas.onclick = function(e: MouseEvent) {
+            console.log('鼠标单击动作');
+            let x = e.offsetX;
+            let y = e.offsetY;
+            // 发送点击事件
+            x = x * component.ret;
+            y = y * component.ret;
+
+            let content = {
+                'actionType': 'click',
+                'imageWidth': component.imageWidth,
+                'imageHeight': component.imageHeight,
+                'points': '[' + x + ',' + y + ']'
+            };
+            component.sendMinitouchCommand('minitouchEvent', component.deviceId, JSON.stringify(content));
+        };
+        this.canvas.onmousedown = function(e: MouseEvent) {
+            console.log('鼠标按下');
+            component.isDivMouseDown = true;
+
+            let x = e.offsetX;
+            let y = e.offsetY;
+
+            x = x * component.ret;
+            y = y * component.ret;
+
+            // 发送鼠标按下命令
+            let content = {
+                'actionType': 'mouseDown',
+                'imageWidth': component.imageWidth,
+                'imageHeight': component.imageHeight,
+                'points': '[' + x + ',' + y + ']'
+            };
+            component.sendMinitouchCommand('minitouchEvent', component.deviceId, JSON.stringify(content));
+        };
+        this.canvas.onmouseup = function(e: MouseEvent) {
+            console.log('鼠标松开');
+            component.isDivMouseDown = false;
+
+            // 发送鼠标释放命令
+            let content = {
+                'actionType': 'mouseUp',
+                'imageWidth': component.imageWidth,
+                'imageHeight': component.imageHeight,
+                'points': ''
+            };
+            component.sendMinitouchCommand('minitouchEvent', component.deviceId, JSON.stringify(content));
+        };
+        this.canvas.onmousemove = function(e: MouseEvent) {
+            if (component.isDivMouseDown) {
+                let x = e.offsetX;
+                let y = e.offsetY;
+                x = x * component.ret;
+                y = y * component.ret;
+
+                let content = {
+                    actionType: 'mouseMove',
+                    imageWidth: component.imageWidth,
+                    imageHeight: component.imageHeight,
+                    points: '[' + x + ',' + y + ']'
+                };
+                component.sendMinitouchCommand('minitouchEvent', component.deviceId, JSON.stringify(content));
+            }
+        };
     }
 
     // 初始化canvas尺寸
-    initCanvasSize(width, height) {
+    initCanvasSize(width: number, height:number) {
         if (width > height) { // 横屏
-            if (isUndefined(this.hScreen) || !this.hScreen) {
+            if (this.hScreen == undefined || !this.hScreen) {
                 this.canvas.width = this.SIDE_LENGTH;
                 this.ret = width / this.canvas.width;
                 this.canvas.height = height / this.ret;
@@ -137,7 +196,7 @@ export class DeviceOperateComponent implements AfterViewInit{
                 this.imageHeight = width;
             }
         } else { // 竖屏
-            if (isUndefined(this.hScreen) || this.hScreen) {
+            if (this.hScreen == undefined || this.hScreen) {
                 this.canvas.height = this.SIDE_LENGTH;
                 this.ret = height / this.canvas.height;
                 this.canvas.width = width / this.ret;
@@ -148,115 +207,15 @@ export class DeviceOperateComponent implements AfterViewInit{
         }
     }
 
-
-    canvasClick(e) {
-        //标准的获取鼠标点击相对于canvas画布的坐标公式
-        let x = e.pageX - this.canvas.getBoundingClientRect().left;
-        let y = e.pageY - this.canvas.getBoundingClientRect().top;
-
-        // 发送点击事件
-        x = x * this.ret;
-        y = y * this.ret;
-
-        let content = {
-            "actionType": "click",
-            "imageWidth": this.imageWidth,
-            "imageHeight": this.imageHeight,
-            "points": "[" + x + "," + y + "]"
-        };
-        this.send("minitouchEvent", this.deviceId, JSON.stringify(content));
-    }
-
-    //================================ 拖拽相关
-    // 鼠标按下
-    divMousedown(e) {
-        console.log("鼠标按下");
-        this.isDivMouseDown = true;
-        this.pointDate = new Date();
-        let x = e.pageX - this.canvas.getBoundingClientRect().left;
-        let y = e.pageY - this.canvas.getBoundingClientRect().top;
-
-        x = x * this.ret;
-        y = y * this.ret;
-
-        // 发送鼠标按下命令
-        let content = {
-            "actionType": "mouseDown",
-            "imageWidth": this.imageWidth,
-            "imageHeight": this.imageHeight,
-            "points": "[" + x + "," + y + "]"
-        };
-        this.send("minitouchEvent", this.deviceId, JSON.stringify(content));
-    };
-
-    // 鼠标松开
-    divMouseup(e: Event) {
-        console.log("鼠标松开");
-        this.isDivMouseDown = false;
-        // this.sendMouseup();
-
-        // 发送鼠标释放命令
-        let content = {
-            "actionType": "mouseUp",
-            "imageWidth": this.imageWidth,
-            "imageHeight": this.imageHeight,
-            "points": ""
-        };
-        this.send("minitouchEvent", this.deviceId, JSON.stringify(content));
-    };
-
-    // 记录坐标
-    divMousemove(e) {
-        if (this.isDivMouseDown) {
-
-            // 发送移动后的坐标、时长
-            let x = e.pageX - this.canvas.getBoundingClientRect().left;
-            let y = e.pageY - this.canvas.getBoundingClientRect().top;
-            x = x * this.ret;
-            y = y * this.ret;
-
-            let content = {
-                "actionType": "mouseMove",
-                "imageWidth": this.imageWidth,
-                "imageHeight": this.imageHeight,
-                "points": "[" + x + "," + y + "]"
-            };
-            this.send("minitouchEvent", this.deviceId, JSON.stringify(content));
-
-            //TODO 暂时不做记录
-            // 点与点之间时间间隔
-            /*nowDate = new Date();
-            timeCost = parseInt(nowDate - pointDate);
-            pointDate = nowDate;
-            console.log("点到点时长：" + timeCost);
-
-            sendMousewait(timeCost);*/
-        }
-    };
-
-    /*function sendMousewait(waittime) {
-        info = {
-            "head": "minitouch",
-            "actionType": "waittime",
-            "retWidth": imageWidth,
-            "retHeight": imageHeight,
-            "points": "[0,0]",
-            "waittime": waittime
-        };
-        send(JSON.stringify(info));
-    }*/
-
-//=================================
-
     // 发送minitouch命令
-    send(type, deviceId, content) {
+    sendMinitouchCommand(typeStr: string, deviceId: string, content: string) {
         let info = {
-            "type": type,
-            // "userId": userId,
-            "deviceId": deviceId,
-            "content": content
-        }
-        console.log("发送的消息是: " + JSON.stringify(info));
+            type: typeStr,
+            // 'userId': userId,
+            deviceId: deviceId,
+            content: content
+        };
+        console.log('发送的消息是: ' + JSON.stringify(info));
         this.ws.send(JSON.stringify(info));
     }
 }
