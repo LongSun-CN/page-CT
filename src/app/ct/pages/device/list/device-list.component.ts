@@ -76,16 +76,19 @@ export class DeviceListComponent {
     importAddDeviceModal: ModalDirective;
 
     @ViewChild('importInstallAndUninstallModal')
-    importInstallAndUninstallModal:ModalDirective;
+    importInstallAndUninstallModal: ModalDirective;
+
+    @ViewChild('importShutdownAndRebootModal')
+    importShutdownAndRebootModal: ModalDirective;
 
     @ViewChild('deleteModal')
-    deleteModal:ModalDirective;
+    deleteModal: ModalDirective;
 
     // 文件上传的地址
-    public uploader:FileUploader;
+    public uploader: FileUploader;
 
     addDevices: any[] = [];
-    installAndUninstallDevices:any[] = [];
+    operateDevices: any[] = [];
 
     constructor(private tableConfig: TableConfig,
                 private httpService: HttpService,
@@ -94,18 +97,18 @@ export class DeviceListComponent {
                 private router: Router,) {
 
         this.uploader = new FileUploader({
-            url:environment.getUrl('install'),
-            queueLimit:1,
-            autoUpload:false,
-            removeAfterUpload:true,
+            url: environment.getUrl('install'),
+            queueLimit: 1,
+            autoUpload: false,
+            removeAfterUpload: true,
         });
         // 对上传失败的处理
-        this.uploader.onSuccessItem = function(fileItem,response){
+        this.uploader.onSuccessItem = function (fileItem, response) {
             let responseData = JSON.parse(response);
-            if(responseData.status == 1){
-                toastService.pop("success","成功","应用包安装成功")
-            }else{
-                toastService.pop("error","失败","应用包安装失败，错误码"+ responseData.status)
+            if (responseData.status == 1) {
+                toastService.pop("success", "成功", "应用包安装成功")
+            } else {
+                toastService.pop("error", "失败", "应用包安装失败，错误码：" + responseData.status)
             }
         }
     }
@@ -153,6 +156,15 @@ export class DeviceListComponent {
                     disabled: () => this.table.getCheckedRows().length == 0,
                     onclick: () => {
                         this.openInstallAndUninstallModal();
+                    }
+                },
+                {
+                    text: '一键关机/重启',
+                    iconCls: 'fa  fa-power-off',
+                    show: true,
+                    disabled: () => this.table.getCheckedRows().length == 0,
+                    onclick: () => {
+                        this.openShutdownAndRebootModal();
                     }
                 },
             ]
@@ -214,7 +226,7 @@ export class DeviceListComponent {
                 if (result.status == '1') {
                     this.deviceDetail = result.properties.device;
                 } else {
-                    this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
+                    this.toastService.pop('error', '失败', '数据异常，错误码：' + result.errorCode);
                 }
             });
     }
@@ -358,7 +370,7 @@ export class DeviceListComponent {
                     this.deviceDetail = result.properties.device;
                     this.toastService.pop('success', '成功', '修改设备信息成功');
                 } else {
-                    this.toastService.pop('error', '失败','修改设备信息失败，错误码：' + result.errorCode);
+                    this.toastService.pop('error', '失败', '修改设备信息失败，错误码：' + result.errorCode);
                 }
             });
         this.onSearch(this.table.currentPage);
@@ -368,16 +380,18 @@ export class DeviceListComponent {
         this.addDevices = [{}];
         this.importAddDeviceModal.show();
     }
-    addDeviceComponent(){
-        if(this.addDevices.length<20){
+
+    addDeviceComponent() {
+        if (this.addDevices.length < 20) {
             this.addDevices.push({});
-        }else {
-            this.toastService.pop("error", '警告','单次最多添加20个设备');
+        } else {
+            this.toastService.pop("error", '警告', '单次最多添加20个设备');
         }
     }
-    addDeviceAction(){
-        var i=0;
-        for(;i<this.addDevices.length;i++){
+
+    addDeviceAction() {
+        var i = 0;
+        for (; i < this.addDevices.length; i++) {
             var addDevice_serialNum = this.addDevices[i].addDevice_serialNum;
             var addDevice_num = this.addDevices[i].addDevice_num;
             var addDevice_desc = this.addDevices[i].addDevice_desc;
@@ -407,19 +421,21 @@ export class DeviceListComponent {
 
         }
     }
-    openInstallAndUninstallModal(){
-        this.installAndUninstallDevices = [];//每次打开需要初始化，否则，会加上上次选中的设备
-        let installAndUninstallDevices = this.installAndUninstallDevices;
+
+    //打开安装卸载模态框
+    openInstallAndUninstallModal() {
+        this.operateDevices = [];
+        let devices = this.operateDevices;
         this.table.getCheckedRows().forEach(function (device) {
-            if(device.isOnline == 1){
-                installAndUninstallDevices.push(device);
+            if (device.isOnline == 1) {
+                devices.push(device);
             }
         })
 
-        installAndUninstallDevices.push(this.table.getCheckedRows()[0]);
+        devices.push(this.table.getCheckedRows()[0]);
 
-        if(this.installAndUninstallDevices.length == 0){
-            this.toastService.pop("error","警告","当前已勾选的无在线设备，请至少勾选一部在线设备");
+        if (this.operateDevices.length == 0) {
+            this.toastService.pop("error", "警告", "当前已勾选的无在线设备，请至少勾选一部在线设备");
             return;
         }
 
@@ -428,45 +444,47 @@ export class DeviceListComponent {
 
     removeOperatorDevice(identifier:string){
         console.log("删除:"+identifier);
-        var arrLength = this.installAndUninstallDevices.length;
+        var arrLength = this.operateDevices.length;
         if(arrLength == 1){
             this.toastService.pop("error","警告","至少保留一个设备");
             return;
         }
         var idx = -1;
         for(var i=0;i<arrLength;i++){
-            if(identifier==this.installAndUninstallDevices[i].identifier){
+            if(identifier==this.operateDevices[i].identifier){
                 idx=i;
                 break;
             }
         }
         if(idx>=0){
-            this.installAndUninstallDevices = this.installAndUninstallDevices.slice(0,idx).concat(this.installAndUninstallDevices.slice(idx+1,arrLength));
+            this.operateDevices = this.operateDevices.slice(0,idx).concat(this.operateDevices.slice(idx+1,arrLength));
         }
-        console.log("删除后剩余:"+this.installAndUninstallDevices.length);
+        console.log("删除后剩余:"+this.operateDevices.length);
 
     }
 
-    installPackageAction(){
+    //安装应用
+    installPackageAction() {
         console.log('安装应用');
         let deviceIds = [];
-        this.installAndUninstallDevices.forEach(function (device) {
+        this.operateDevices.forEach(function (device) {
             deviceIds.push(device.identifier);
         })
         this.uploader.options.additionalParameter = {
-            deviceIds:JSON.stringify(deviceIds)
+            deviceIds: JSON.stringify(deviceIds)
         }
 
         this.uploader.uploadAll();
         this.importInstallAndUninstallModal.hide();
-        this.toastService.pop("success","正在上传安装应用。。。")
+        this.toastService.pop("success", "正在上传安装应用。。。")
     }
 
-    uninstallPackageAction(){
+    //卸载应用
+    uninstallPackageAction() {
         console.log('卸载应用');
         var  deviceIds = '';
-        var arrLength = this.installAndUninstallDevices.length;
-        this.installAndUninstallDevices.forEach(function (installAndUninstallDevice) {
+        var arrLength = this.operateDevices.length;
+        this.operateDevices.forEach(function (installAndUninstallDevice) {
             deviceIds += installAndUninstallDevice.identifier +',';
         });
         deviceIds = deviceIds.slice(0,deviceIds.length-1);
@@ -491,15 +509,17 @@ export class DeviceListComponent {
             });
     }
 
-    openDeleteDeviceModal(){
-        if(this.table.getCheckedRows().length == 0){
-            this.toastService.pop('error','警告','请先勾选需要删除的设备')
+    //打开删除设备模态框
+    openDeleteDeviceModal() {
+        if (this.table.getCheckedRows().length == 0) {
+            this.toastService.pop('error', '警告', '请先勾选需要删除的设备')
         } else {
             this.deleteModal.show();
         }
     }
 
-    deleteDevice(){
+    //删除设备
+    deleteDevice() {
         var idList = [];
         this.table.getCheckedRows().forEach(function (row) {
             idList.push(row.id);
@@ -514,16 +534,77 @@ export class DeviceListComponent {
             .subscribe((result) => {
                 console.log(result);
                 if (result.status == '1') {
-                    this.deviceDetail = result.properties.device;
-                    this.toastService.pop('success', '成功','设备删除成功');
+                    this.toastService.pop('success', '成功', '设备删除成功');
                 } else {
-                    this.toastService.pop('error', '失败','设备删除失败，错误码：' + result.errorCode);
+                    this.toastService.pop('error', '失败', '设备删除失败，错误码：' + result.errorCode);
                 }
             });
         this.deleteModal.hide();
         this.onSearch(this.table.currentPage);
-
     }
 
+    //打开关机重启模态框
+    openShutdownAndRebootModal() {
+        this.operateDevices = [];
+        let devices = this.operateDevices;
+        this.table.getCheckedRows().forEach(function (device) {
+            if (device.isOnline == 1) {
+                devices.push(device);
+            }
+        })
+
+        devices.push(this.table.getCheckedRows()[0]);
+
+        if (this.operateDevices.length == 0) {
+            this.toastService.pop("error", "警告", "当前已勾选的无在线设备，请至少勾选一部在线设备");
+            return;
+        }
+
+        this.importShutdownAndRebootModal.show();
+    }
+
+    //关机
+    shutdownDevices() {
+        this.importShutdownAndRebootModal.hide();
+        var deviceIdList = [];
+        this.operateDevices.forEach(function (device) {
+            deviceIdList.push(device.identifier);
+        })
+        this.httpService
+            .get(environment.getUrl('shutdown'), {
+                deviceIdList: deviceIdList
+            })
+            .map((response) => response.json())
+            .subscribe((result) => {
+                console.log(result);
+                if (result.status == '1') {
+                    this.toastService.pop('success', '成功', '设备关机完成');
+                } else {
+                    this.toastService.pop('error', '失败', '设备关机失败，错误码：' + result.errorCode);
+                }
+            });
+    }
+
+    //重启
+    rebootDevices() {
+        this.importShutdownAndRebootModal.hide();
+        var deviceIdList = [];
+        this.operateDevices.forEach(function (device) {
+            deviceIdList.push(device.identifier);
+        })
+        this.httpService
+            .get(environment.getUrl('reboot'), {
+                deviceIdList: deviceIdList
+            })
+            .map((response) => response.json())
+            .subscribe((result) => {
+                console.log(result);
+                if (result.status == '1') {
+                    this.toastService.pop('success', '成功', '设备重启完成');
+                } else {
+                    this.toastService.pop('error', '失败', '设备重启失败，错误码：' + result.errorCode);
+                }
+            });
+    }
 
 }

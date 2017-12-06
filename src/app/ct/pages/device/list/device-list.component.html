@@ -481,7 +481,7 @@
                 <div class="add-modal-footer-btn">
                     <button class="btn btn-primary" type="button" (click)="importModal.hide();updateDeviceDetail()">保存修改
                     </button>
-                    <button class="btn btn-primary" type="button"
+                    <button class="btn btn-warning" type="button"
                             (click)="importModal.hide()">取消
                     </button>
                 </div>
@@ -534,14 +534,14 @@
             <div class="modal-footer">
                 <div class="add-modal-footer-btn">
                     <button class="btn btn-primary" type="button" (click)="addDeviceAction()">添加</button>
-                    <button class="btn btn-primary" type="button" (click)="importAddDeviceModal.hide()">取消</button>
+                    <button class="btn btn-warning" type="button" (click)="importAddDeviceModal.hide()">取消</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade"  bsModal #importInstallAndUninstallModal="bs-modal">
+<div class="modal fade" bsModal #importInstallAndUninstallModal="bs-modal">
     <div class="modal-dialog">
         <div class="modal-content modal-center modal-center-lg">
             <div class="modal-header">
@@ -569,11 +569,13 @@
                             </div>
                         </div>
                         <div class="box-body">
-                            <ol >
-                                <li *ngFor="let installAndUninstallDevice of installAndUninstallDevices">
-                                    <label border="1" >机型:</label> <label border="1" >{{installAndUninstallDevice.model}}</label>
-                                    <label>,</label><label border="1" >设备ID:</label> <label border="1" >{{installAndUninstallDevice.identifier}}</label>
-                                    <button type="button" class="btn btn-box-tool" (click)="removeOperatorDevice(installAndUninstallDevice.identifier);">
+                            <ol>
+                                <li *ngFor="let installAndUninstallDevice of operateDevices">
+                                    <label border="1">机型:</label> <label
+                                    border="1">{{installAndUninstallDevice.model}}</label>
+                                    <label>,</label><label border="1">设备ID:</label> <label border="1">{{installAndUninstallDevice.identifier}}</label>
+                                    <button type="button" class="btn btn-box-tool"
+                                            (click)="removeOperatorDevice(installAndUninstallDevice.identifier);">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </li>
@@ -583,7 +585,7 @@
                             <div class="add-modal-footer-btn">
                                 <button class="btn btn-primary" type="button" (click)="installPackageAction()">安装
                                 </button>
-                                <button class="btn btn-primary" type="button"
+                                <button class="btn btn-warning" type="button"
                                         (click)="importInstallAndUninstallModal.hide()">取消
                                 </button>
                             </div>
@@ -594,11 +596,12 @@
                             <label>输入包名:</label><input id="uninstallPackageName" placeholder="输入要卸载的包名" />
                         </div>
                         <div class="box-body">
-                            <ol >
-                                <li *ngFor="let installAndUninstallDevice of installAndUninstallDevices">
-                                    <label border="1" >机型:</label> <label border="1" >{{installAndUninstallDevice.model}}</label>
-                                    <label>,</label><label border="1" >设备ID:</label> <label border="1" >{{installAndUninstallDevice.identifier}}</label>
-                                    <button type="button" class="btn btn-box-tool" (click)="removeOperatorDevice(installAndUninstallDevice.identifier);">
+                            <ol>
+                                <li *ngFor="let device of operateDevices">
+                                    <label border="1">机型:</label> <label border="1">{{device.model}}</label>
+                                    <label>,</label><label border="1">设备ID:</label> <label border="1">{{device.identifier}}</label>
+                                    <button type="button" class="btn btn-box-tool"
+                                            (click)="removeOperatorDevice(device.identifier);">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </li>
@@ -608,11 +611,50 @@
                             <div class="add-modal-footer-btn">
                                 <button class="btn btn-primary" type="button" (click)="uninstallPackageAction()">卸载
                                 </button>
-                                <button class="btn btn-primary" type="button"
+                                <button class="btn btn-warning" type="button"
                                         (click)="importInstallAndUninstallModal.hide()">取消
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" bsModal #importShutdownAndRebootModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content modal-center modal-center-lg">
+            <div class="modal-header">
+                <button class="close" type="button" aria-label="Close" (click)="importShutdownAndRebootModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">一键关机/重启</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <ol>
+                        <li *ngFor="let device of operateDevices">
+                            <label border="1">机型:</label> <label border="1">{{device.model}}</label>
+                            <label>,</label><label border="1">设备ID:</label> <label
+                            border="1">{{device.identifier}}</label>
+                            <button type="button" class="btn btn-box-tool"
+                                    (click)="removeOperatorDevice(device.identifier);">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <div class="add-modal-footer-btn">
+                        <button class="btn btn-primary" type="button" (click)="shutdownDevices()">关机
+                        </button>
+                        <button class="btn btn-primary" type="button" (click)="rebootDevices()">重启
+                        </button>
+                        <button class="btn btn-warning" type="button"
+                                (click)="importShutdownAndRebootModal.hide()">取消
+                        </button>
                     </div>
                 </div>
             </div>
@@ -635,7 +677,7 @@
             <div class="modal-footer">
                 <div class="add-modal-footer-btn">
                     <button class="btn btn-primary" type="button" (click)="deleteDevice()">确定</button>
-                    <button class="btn btn-primary" type="button" (click)="deleteModal.hide()">取消</button>
+                    <button class="btn btn-warning" type="button" (click)="deleteModal.hide()">取消</button>
                 </div>
             </div>
         </div>
