@@ -390,35 +390,42 @@ export class DeviceListComponent {
     }
 
     addDeviceAction() {
+        let addDevicesParams = [];
         var i = 0;
         for (; i < this.addDevices.length; i++) {
             var addDevice_serialNum = this.addDevices[i].addDevice_serialNum;
             var addDevice_num = this.addDevices[i].addDevice_num;
             var addDevice_desc = this.addDevices[i].addDevice_desc;
-            if(addDevice_serialNum==null || addDevice_serialNum==''|| addDevice_num==null || addDevice_num==''||addDevice_desc==null || addDevice_desc==''){
+            if(addDevice_serialNum==null || addDevice_serialNum==''|| addDevice_num==null || addDevice_num==''){
                 this.toastService.pop("error", '警告','设备信息填写不完整，请填写后重新添加');
                 return;
             }else{
                 console.log('设备信息：'+addDevice_serialNum+','+addDevice_num+','+addDevice_desc);
-                this.httpService.post(environment.getUrl('device/add'), {
-                    num: addDevice_num,
-                    identifier: addDevice_serialNum,
-                    description: addDevice_desc
-                })
+                let params = {
+                    identifier:addDevice_serialNum,
+                    num:addDevice_num,
+                    description:addDevice_desc
+                };
+                addDevicesParams.push(params);
+                this.onSearch(this.table.currentPage);
+            }
+
+        }
+        if(addDevicesParams.length>0){
+            let addDevicesParamsStr = JSON.stringify(addDevicesParams);
+            console.log("addDevicesParamsStr="+addDevicesParamsStr);
+            this.httpService.post(environment.getUrl('device/add'), {
+                data:addDevicesParamsStr
+            })
                 .map((response) => response.json())
                 .subscribe((result) => {
                     console.log(result);
                     if (result.status == '1') {
                         this.toastService.pop("success", '成功',addDevice_num+'设备添加成功');
-                        this.importAddDeviceModal.hide();
                     } else {
                         this.toastService.pop('error', '数据异常，错误码：' + result.errorCode);
                     }
                 });
-
-                this.onSearch(this.table.currentPage);
-            }
-
         }
     }
 
@@ -605,6 +612,16 @@ export class DeviceListComponent {
                     this.toastService.pop('error', '失败', '设备重启失败，错误码：' + result.errorCode);
                 }
             });
+    }
+
+    cancelAddThisDevice(idx:number){
+        console.log('移除设备'+(idx+1));
+        if(this.addDevices.length>1){
+            this.addDevices = this.addDevices.slice(0,idx).concat(this.addDevices.slice(idx+1,this.addDevices.length));
+        }else{
+            this.toastService.pop('error', '失败', '至少保留一个添加设备');
+        }
+
     }
 
 }

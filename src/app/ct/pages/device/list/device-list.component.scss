@@ -168,7 +168,27 @@
 }
 .param_add_device_table tbody tr{
     border: 1px solid #00ca6d;
+    margin-right: 0px;
 }
+
 .addDeviceComponent{
     margin-top: 5px;
 }
+.param_content_add{
+    overflow-x: hidden;
+    overflow-y:scroll;
+    max-height: 400px;
+}
+.addDeviceBottomComponnent{
+    height: 20px;
+    text-align: right;
+    vertical-align: middle;
+}
+.addDeviceBottomComponnent button{
+    height: 18px;
+    width: 18px;
+    margin: 1px;
+    color: #dd4b39;
+}
+
+
