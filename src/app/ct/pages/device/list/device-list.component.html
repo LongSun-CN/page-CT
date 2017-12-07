@@ -508,7 +508,7 @@
                                     <!--<th>设备编号</th>-->
                                     <!--<th>描述</th>-->
                                 <!--</tr>-->
-                                <tbody>
+                                <tbody >
                                     <tr *ngFor="let addDevice of addDevices">
                                         <th>{{addDevices.indexOf(addDevice,0)+1}}</th>
                                         <td>
@@ -520,6 +520,12 @@
                                             </div>
                                             <div class="addDeviceDesc">
                                                 <label>描述：</label><input [(ngModel)]="addDevice.addDevice_desc"   name="addDevice_desc" placeholder="描述信息" required />
+                                            </div>
+                                            <div class="addDeviceBottomComponnent">
+                                                <button type="button" class="btn btn-box-tool"
+                                                        (click)="cancelAddThisDevice(addDevices.indexOf(addDevice,0))">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
